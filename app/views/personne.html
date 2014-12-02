@@ -6,13 +6,58 @@
 
 		<h2>{{membre.surname}} {{membre.name}}</h2>
 
-		<div ng-show = "membre.e-mailpublic != ''">{{membre.e-mailpublic}}</div>
+
+		<img src="http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/{{membre.identifiant}}.png" alt="">
+
+		<section>
+			<div ng-show = "membre.workingcitiesseparatedbycomas != ''">Ville(s) : {{membre.workingcitiesseparatedbycomas}}</div>		
+
+			<div ng-show = "membre.minibio40carfr != ''">{{membre.minibio40carfr}}</div>
+		</section>
+		
+
+
+		<section ng-show = "membre.phdthesistitlefr != ''">
+			<h1>Sa thèse</h1>
+			<h3>
+				{{membre.phdthesistitlefr}}
+			</h3>
+
+			<p ng-show = "membre.phddescriptionfr != ''">
+				{{membre.phddescriptionfr}}
+			</p>
+		</section>
+
+		<section ng-show = "contactVisible()">
+			<h3>Ses contacts</h3>
+			<div ng-show = "membre.e-mailpublic != ''">E-mail : {{membre.e-mailpublic}}</div>
+
+			<div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>			
+
+			<div ng-show = "membre.site != ''">Site de recherche : <a href="{{ membre.site }}">{{ membre.site }}</a></div>	
+
+			<div ng-show = "membre.sites">
+				<p ng-repeat="site in membre.sites">
+					<a href="{{site.url}}">{{site.text}}</a>
+				</p>
+			</div>	
+		</section>
+
+
+		
+			
+
+		
+		
+	<div ng-show = "membre.doctoralschool != ''">École doctorale : {{membre.doctoralschool}}</div>	
+
+
+		
 
 		<div ng-show = "membre.etablissement1 != ''">Établissement 1 : {{membre.etablissement1}}</div>		
 
-		<p style="margin-top:30px; margin-bottom:30px"><a href="javascript:history.back()"  class='nav-btn'>Retour à la page précédente</a></p>
+		<p style="margin-top:30px; margin-bottom:30px;"><a href="javascript:history.back()"  class='nav-btn'>Retour à la page précédente</a> <a href="#membres"  class='nav-btn'>Voir l'annuaire complet des membres de Design en Recherche</a></p>
 
-		<p><a href="#membres"  class='nav-btn'>Voir l'annuaire complet des membres de Design en Recherche</a></p>
 
 	</div>
 </div>
