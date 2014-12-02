@@ -12,7 +12,6 @@ angular.module('derCleanApp')
         restrict: 'A', //use as attribute 
         replace: false,
         link: function (scope, elem) {
-
             //after the route has changed
             scope.$on("$routeChangeSuccess", function () {
                 //cleaning links

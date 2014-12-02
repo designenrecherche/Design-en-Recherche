@@ -7,12 +7,20 @@
  * # designLogo
  */
 angular.module('derCleanApp')
-  .directive('designLogo', function () {
+  .directive('designLogo', function ($rootScope) {
     return {
-      template: '<div></div>',
-      restrict: 'E',
+      restrict: 'A',
       link: function postLink(scope, element, attrs) {
-        element.text('this is the designLogo directive');
+        
+      	/*if(!der.loaded)
+        	der.init();
+
+        $rootScope.$watch('annuaireData', function(){
+        	if($rootScope.annuaireData){}
+        		der.feedMeWithYourBigData($rootScope.annuaireData);
+        })*/
+
       }
     };
   });
+

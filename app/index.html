@@ -48,7 +48,7 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -67,7 +67,7 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
      
      <!--logo-->
 
-     <div id="designLogo" designLogo></div>
+     <div id="designLogo" design-logo></div>
 
     <!--nav -->
     <nav style="display:none;margin-top:0%" class="navbar navbar-default navbar-fixed-top" role="navigation" bs-active-link>
@@ -148,8 +148,8 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -158,13 +158,15 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/angularytics/dist/angularytics.min.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angularytics/dist/angularytics.js"></script>
-     <script src="bower_components/tabletop/src/tabletop.js"></script>
+    <script src="bower_components/tabletop/src/tabletop.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/d3/der.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/global.js"></script>
         <script src="scripts/controllers/main.js"></script>
@@ -178,8 +180,10 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
         <script src="scripts/controllers/perdudanslebrouillarddudesign.js"></script>
 
         <script src="scripts/directives/bsactivelink.js"></script>
+         <script src="scripts/directives/designlogo.js"></script>
         <script src="scripts/services/spreadsheetretrieve.js"></script>
         <script src="scripts/controllers/annuaire.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>
