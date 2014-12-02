@@ -1,0 +1,82 @@
+
+
+<div class='content-scrollable-container'>
+
+<div class='content-scrollable-content'>
+
+				
+
+
+	<div ng-controller="AnnuaireCtrl" class='annuaire-container'>
+
+
+		<h2>{{ 'MEMBERSNAV' | translate }}</h2>
+
+
+
+
+		<div class="row mar-bot30 interface-container"  style='text-align : center;'>
+				<div class="col-md-12"   style='text-align : center;'>
+			<!--controles -->
+			<div style='display:inline-block;'>
+			    <form class="form-inline"  style='text-align : center;'>
+			      <input ng-model="query" type="text"
+			        placeholder="{{ 'SEARCHTEXT' | translate }}" autofocus>
+			    </form>
+			
+			<!-- sélecteur pour le mode de classement des membres - à montrer quand suffisamment d'infos entrées par les membres -->
+
+			<!--
+			    <div class="btn-group" dropdown is-open="status.isopen">
+			      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+			       	{{ 'ORDERBY' | translate}} {{ predicate }} <span class="caret"></span>
+			      </button>
+			      <ul class="dropdown-menu" role="menu">
+			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'nom'">{{ 'DIRECTORYNAME' | translate}}</a></li>
+			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'laboratoire'">{{ 'DIRECTORYLAB' | translate}}</a></li>
+			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'etablissement'">{{ 'DIRECTORYUNIVERSITY' | translate}}</a></li>
+			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'directeur'">{{ 'DIRECTORYSUPERVISOR' | translate}}</a></li>
+			      </ul>
+			    </div>
+			-->
+			</div>
+
+			<script>
+			$('.nohref').click(function(e){e.preventDefault()})
+			</script>
+
+
+		</div><!-- <div class="col-md-offset-5 col-md-5"> -->
+
+	</div>
+
+			
+	<div class="row mar-bot40">
+		<div class="col-md-offset-1 col-md-10">
+
+
+		    <div  class="annuaire-tile" ng-repeat="membre in membres | filter:query | orderBy:predicate">
+
+		    	<div class="" ng-mouseover="showInLogo(membre.identifiant)"
+		    		ng-mouseleave="hideMembersLogo()"
+		    	>
+		    		<a href="#personne/{{membre.identifiant}}">
+					 	
+					      	<h3>
+					      		
+					      	{{membre.surname}} {{membre.name}} /
+					      		
+					      	</h3>
+					    
+					</a>
+				</div>
+		      </div>
+
+		  </div>
+
+</div><!--row mar-bot40 -->
+
+				
+</div><!--row mar-bot40-->
+</div><!--content-scrollable-content -->
+</div><!-- content-scrollable-container -->
