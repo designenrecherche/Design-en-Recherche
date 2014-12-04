@@ -19,9 +19,9 @@ angular.module('derCleanApp')
 
 
   	function formatMembers(){
-  		for(i in $rootScope.annuaireData){
+  		/*for(i in $rootScope.annuaireData){
   			
-  		}
+  		}*/
   	}
 
   });
