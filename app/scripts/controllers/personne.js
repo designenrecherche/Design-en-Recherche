@@ -62,6 +62,53 @@ angular.module('derCleanApp')
     $scope.pageClass = 'page-personne';
 
 
+    $scope.buildAffiliation = function(){
+        if($scope.membre){
+
+            var m = $scope.membre;
+            var affiliation1 = "";
+            var output = "";
+
+            if(m.etablissement1){
+                affiliation1 += m.etablissement1;
+                if(m.laboratoire1)
+                    affiliation1 += ", " + m.laboratoire1;
+                if(m["équipe1"])
+                    affiliation1 += ", " + m["équipe1"];
+            }
+            if(affiliation1!="")
+                output += "<h3>" + affiliation1 + ".</h3>";
+
+            var affiliation2 = "";
+            if(m.etablissement2){
+                affiliation2 += m.etablissement2;
+                if(m.laboratoire2)
+                    affiliation2 += ", " + m.laboratoire2;
+                if(m["équipe2"])
+                    affiliation2 += ", " + m["équipe2"];
+            }
+            if(affiliation2!="")
+                output += "<h3>" + affiliation2 + ".</h3>";
+
+            var affiliation3 = "";
+            if(m.etablissement3){
+                affiliation3 += m.etablissement1;
+                if(m.laboratoire3)
+                    affiliation3 += ", " + m.laboratoire3;
+                if(m["équipe1"])
+                    affiliation3 += ", " + m["équipe3"];
+            }
+            if(affiliation3!="")
+                output += "<h3>" + affiliation3 + ".</h3>";
+                
+
+            return output;
+        }
+        return "";
+        
+    }
+
+
     $scope.contactVisible = function(){
     	if($scope.membre)
     	return $scope.membre["e-mailpublic"] != "" || $scope.membre.phonepublic != ""

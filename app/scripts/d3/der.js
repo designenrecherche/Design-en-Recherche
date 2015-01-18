@@ -6,15 +6,10 @@
 
     var Der = function(){
 
-    	var svg, der = this,
-		container, gifPath, gifDuration, width, height, img, logoDataPath, logoData, 
-		link, node, 
-		bigRadius, mediumRadius, 
-		dataLoaded, animationDone = false, 
-		ratio, scaleLogo, loaded = false;
+	
 
-		/*
-	total args :
+	/*
+	for information, here is the total list of arguments :
 	{
 		containerId: String (id of container div)
 		gifPath: String (path to gif)
@@ -46,12 +41,13 @@
 			('width' in args && typeof args.width == 'number') ? der.width = parseInt(args.width, 10) : der.width = rawGif.width;
 			('height' in args && typeof args.height == 'number') ? der.height = parseInt(args.height, 10) : der.height = rawGif.height;
 			'logoDataPath' in args ? der.logoDataPath = args.logoDataPath : der.logoDataPath = 'data/designLogo.json';
-
+			//get ratio of GIF
 			der.ratio = rawGif.height/rawGif.width;
 
 			der.svg = container.append('svg').style('position', 'absolute').attr('width', width).attr('height', height)
 			.append('g')
 			.attr('transform', function(){
+				//why these transformations ?
 				return 'scale(0.65)' + 'translate('
 					+ width*0.2
 					+','
@@ -85,7 +81,7 @@
 
 			der.gifDuration = 2000;
 
-			//following could be improved by listening to gif animation's end
+			//TODO : following could be improved by listening to gif animation's end
 			setTimeout(function(){
 				img.style('display', 'none');
 				der.svg.selectAll('.node,.link').style('display', 'block');
@@ -94,8 +90,6 @@
 					der.faisLePaon();
 			}, der.gifDuration);
 
-			
-			
 			img.style('width', function(){return width*0.75 + 'px'}).style('height', function(){return width*ratio + 'px'})
 			.style('padding-left', function(){return width*0.15 + 'px'})
 			.style('padding-top', function(){return height*0.15 + 'px'});
@@ -107,7 +101,7 @@
 		return der;
 	};
 
-
+	//not sure with all these "this"
 	this.initShape = function(gData){
 		this.link = this.svg.selectAll('.link').data(gData.links).enter().append('line').attr('class', 'link').style('display', 'none');
 		this.node = this.svg.selectAll('.node').data(gData.nodes).enter().append('g').attr('class', 'node').style('display', 'none');
@@ -166,7 +160,6 @@
 
 	//showing one node
 	this.showNodeById = function(id){
-
 		this.node.filter(function(d){
 			return d.identifiant == id;
 		}).each(nodeUp);
@@ -184,6 +177,7 @@
 		d3.select(this).select('image').transition()
 				.attr('x', -bigRadius).attr('y', -bigRadius)
 				.attr('width', bigRadius*2).attr('height', bigRadius*2);
+
 		return this;
 	}
 
@@ -235,6 +229,7 @@
 
 		if(this.animationDone)
 			this.faisLePaon();
+		//else ok for faisLePaon when animation is done ?
 	};
 
 	this.loadLogoData = function(){
@@ -266,9 +261,6 @@
 		}
 
     }
-	
-
-	
 
 	window.der = new Der();
 

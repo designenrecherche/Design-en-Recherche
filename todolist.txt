@@ -1,0 +1,25 @@
+TODOS Site DER - 12 Janvier 2015
+
+
+JS :
+- passer l’existant au jshint
+- logo : faire fonctionner de manière autonome (n’importe quelles dimensions, n’importe quel contexte)
+
+Views :
+- content-scrollable-content dans le index.html ?
+- supprimer la directive bsactivelink ?
+- view
+
+CSS :
+- nettoyer, découper
+- factoriser au maximum : CSS Hint ?
+- prendre en compte les mockups de Max
+
+Le comportement de DerLogo est régi par trois chargements asynchrones simultanés dont il faut prévoir chaque cas possible (GIF, son, google data):
+- télécharger et afficher le GiF
+- mettre en place un fichier SVG qui va recevoir le logo
+
+PUIS :
+- au chargement du GIF, définir la hauteur et la largeur
+- au chargement du JSON des positions du logo, les afficher
+- quand le GIF est chargé, afficher le logo SVG ou lui permettre de s’afficher
