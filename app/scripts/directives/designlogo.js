@@ -12,14 +12,20 @@ angular.module('derCleanApp')
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
         
-      	if(!der.loaded)
-        	der.init();
+        if(!der.initiated)
+          der.init();
 
         $rootScope.$watch('annuaireData', function(){
-        	if($rootScope.annuaireData)
-        		der.feedMeWithYourBigData($rootScope.annuaireData);
-        })
+        	if($rootScope.annuaireData && !der.dataUpdated)
+        		der.updateData($rootScope.annuaireData);
+        });
 
+        $rootScope.$watch('activeMemberId', function(){
+          console.log($rootScope.activeMemberId);
+          if($rootScope.activeMemberId)
+            der.showNodeById($rootScope.activeMemberId);
+          else der.hideAll();
+        });
       }
     };
   });

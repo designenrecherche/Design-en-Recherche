@@ -9,7 +9,6 @@
  angular.module('derCleanApp')
  .directive('person', function ($rootScope, $document) {
   	//slugify function, identical to the gspreadsheet script's one
-
   	function slugify(value) {
 
   		value = value.toLowerCase();
@@ -17,7 +16,6 @@
   		value = value.replace(/\s+/g, '-');
 
   		return value;
-
   	}
   	//find someone annuaire's id basing on her naturally spelled name and surname
   	function findInAnnuaire(text, annuaire){
@@ -49,9 +47,10 @@
 
       	element.on('mouseover', mouseover);
       	function mouseover(){
-      		console.log('mouseover');
+      		//updating the active member id
       		if(element.attr('id'))
       			$rootScope.activeMemberId = element.attr('id');
+      		else $rootScope.activeMemberId = "";
       	}
       	element.on('mouseout', function(){
       		$document.off('mouseover', mouseover);

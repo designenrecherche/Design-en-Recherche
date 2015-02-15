@@ -62,13 +62,14 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
     <![endif]-->
 
 
+
+<!--logo-->
+    <div class="logo-container">
+        <div class="logo-wrapper" id="designLogo" design-logo ng-class="{'big':  activeMemberId }"></div>
+    </div>
       <!-- on utilise ng-view pour injecter les vues -->
     <!-- chaque controller angular applique sa classe ici -->
     <div class="page {{ pageClass }}" ng-view></div>
-     
-     <!--logo-->
-
-     <div id="designLogo" design-logo></div>
 
     <!--nav -->
     <nav style="display:none;margin-top:0%" class="navbar navbar-default navbar-fixed-top" role="navigation" bs-active-link>
@@ -117,6 +118,8 @@ Constituée en association (loi 1901) depuis décembre 2013, nous sommes persuad
                 </ul>
 
             </div><!-- /.navbar-collapse -->
+
+                 
 
         </div><!-- /.container-fluid -->
 

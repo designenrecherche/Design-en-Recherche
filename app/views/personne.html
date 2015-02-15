@@ -8,7 +8,6 @@
 
 			<div ng-bind-html="buildAffiliation()"></div>
 
-			<div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>	
 
 			<div ng-show="membre.researchtopickeywordsseparatedbycomasfr != ''">
 				<h4>Mots-clés de recherche</h4>
@@ -41,7 +40,7 @@
 				<div ng-show="membre.startyear">
 					<p>
 						Recherche débutée en {{membre.startyear}}
-					<span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
+						<span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
 					</p>
 				</div>
 
@@ -86,9 +85,9 @@
 	<div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>	
 	<div ng-show = "membre.site != ''">Site principal : <a href="{{ membre.site }}">{{ membre.site }}</a></div>	
 	<div ng-show = "membre.sites">
-					<p>Autres sites :</p>
-					<p ng-repeat="site in membre.sites">
-						<a href="{{site.url}}">{{site.text}}</a>
-					</p>
+		<p>Autres sites :</p>
+		<p ng-repeat="site in membre.sites">
+			<a href="{{site.url}}">{{site.text}}</a>
+		</p>
 	</div>	
 </aside>
