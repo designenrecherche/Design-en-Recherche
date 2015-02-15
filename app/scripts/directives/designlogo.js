@@ -12,13 +12,13 @@ angular.module('derCleanApp')
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
         
-      	/*if(!der.loaded)
+      	if(!der.loaded)
         	der.init();
 
         $rootScope.$watch('annuaireData', function(){
-        	if($rootScope.annuaireData){}
+        	if($rootScope.annuaireData)
         		der.feedMeWithYourBigData($rootScope.annuaireData);
-        })*/
+        })
 
       }
     };

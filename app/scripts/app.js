@@ -48,6 +48,10 @@ angular
         templateUrl: 'views/methodes.html',
         controller: 'EvenementsMethodesCtrl'
       })
+      .when('/evenements/projet', {
+            templateUrl: 'views/projet.html',
+            controller: 'ProjetCtrl'
+        })
       .when('/personne/:name', {
         templateUrl: 'views/personne.html',
         controller: 'PersonneNameCtrl'
