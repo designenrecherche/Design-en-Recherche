@@ -11,7 +11,7 @@
 			<div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>	
 
 			<div ng-show="membre.researchtopickeywordsseparatedbycomasfr != ''">
-				<h4>Mots-clés de recherche :</h4>
+				<h4>Mots-clés de recherche</h4>
 				<p>
 					{{ membre.researchtopickeywordsseparatedbycomasfr}}
 				</p>
@@ -19,7 +19,7 @@
 
 			
 			<div ng-show = "membre.phdthesistitlefr != ''">
-				<h4>Thèse :</h4>
+				<h4>Thèse</h4>
 				<h3>
 					{{membre.phdthesistitlefr}}
 				</h3>
@@ -63,7 +63,7 @@
 
 
 <aside class="profile-aside-left col-sm-3">
-	<img src="http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/{{membre.identifiant}}.png" alt="">
+	<img ng-src="http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/{{membre.identifiant}}.png" err-src="images/portrait.png" alt="">
 	<p>
 		<a href="javascript:history.back()">< retour à la page précédente</a> 
 	</p>
