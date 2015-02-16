@@ -1,0 +1,191 @@
+/* JOURNEES DETUDE */
+
+
+
+/* ITEM */
+
+.event-item{
+    margin-bottom : 30px;
+}
+
+.event-item:hover{
+    background-color : rgba(0,0,0,.05);
+    /*border-top : 1px #475350 solid;
+    border-bottom : 1px #475350 solid;*/
+
+    -webkit-transition: all ease-in-out 0.5s;
+    -moz-transition: all ease-in-out 0.5s;
+    -ms-transition: all ease-in-out 0.5s;
+    -o-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+}
+
+.event-item a{
+    text-decoration : none;
+    color : #475350;
+    /*text-transform : uppercase;*/
+}
+
+.event-item .infos{
+    font-style : italic;
+}
+
+.event-item .moreinfos{
+    text-transform : uppercase;
+    font-size : 1.3em;
+}
+
+.event-item .moreinfos:hover{
+    font-weight : 800;
+}
+
+
+
+
+.program table{
+    width : 100%;
+}
+
+.program tr:hover{
+    background: rgba(255,255,255,0.1);
+}
+
+.program td{
+    margin-bottom : 5px;
+}
+
+.program td:first-child{
+    text-align:right;
+    width:35%;
+    padding-right : 15px;
+    font-style : italic;
+}
+
+
+.program td:last-child{
+
+}
+
+.program a{
+    text-decoration : none;
+    color : #475350;;
+}
+
+td:last-child div{
+    border-left : 1px solid #2e3438;
+    margin-bottom  :5px;
+    padding-left : 10px;
+    text-align : left;
+}
+
+
+.nav-btn{
+    text-align: center;
+    width: 20%;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor : pointer;
+    color : #475350;
+    background-color : rgba(0,0,0,0.2);
+    vertical-align: center;
+    text-align: center;
+    padding : 10px 15px;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+
+.nav-btn:hover{
+    border-radius : 3px 3px 3px 3px;
+    background-color : rgba(0,0,0,0.5);
+    border : none;
+    color : white;
+    text-decoration: none;
+}
+
+
+.page-methodes .titre{
+    text-transform : uppercase;
+    margin-top : 2%;
+}
+
+.page-methodes .titre h2{
+    margin : 0;
+}
+
+.page-methodes .citation{
+    width : 100%;
+    margin : 0;
+    padding-left : 25%;
+    padding-right : 25%;
+    padding-top : 20px;
+    padding-bottom: 10px;
+    margin-bottom : 20px;
+}
+
+.page-methodes #menu{
+    text-align : center;
+}
+.page-methodes #menu ul{
+    display : inline-block;
+    text-align : center;
+    border : none;
+}
+
+.page-methodes #menu a{
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor : pointer;
+    color : #475350;
+}
+
+.page-methodes #menu a:hover{
+    border-radius : 3px 3px 3px 3px;
+    background-color : rgba(0,0,0,0.5);
+    border : none;
+    color : white;
+}
+
+.ressources-list{
+    text-align: left;
+}
+.ressources-list li{
+    list-style-type: none;
+    margin-bottom: 10px;
+    display:inline-block;
+    margin-bottom: 10px;
+}
+
+.ressource-btn,.ressource-ctn{
+    display : inline;
+    float : left;
+}
+
+.ressource-btn{
+    width: 20%;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor : pointer;
+    color : #475350;
+    background-color : rgba(0,0,0,0.2);
+    vertical-align: center;
+    text-align: center;
+    padding : 10px 15px;
+}
+
+.ressource-btn a{
+    color : inherit;
+    text-decoration: none;
+}
+
+.ressource-btn:hover{
+    border-radius : 3px 3px 3px 3px;
+    background-color : rgba(0,0,0,0.5);
+    border : none;
+    color : white;
+}
+
+.ressource-ctn{
+    width : 70%;
+    padding-left: 10px;
+}

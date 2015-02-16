@@ -1,0 +1,26 @@
+.page-reseau{
+    padding-bottom : 10%;
+}
+
+.page-reseau p{
+    text-align : left;
+}
+
+.page-reseau h3{
+    text-align: left;
+}
+
+.page-reseau li{
+    list-style-type : none;
+    text-align: left;
+}
+
+.page-reseau ul{
+    padding-left: 0;
+}
+
+.page-reseau a{
+    text-decoration: none;
+    color : #475350;
+    font-weight: 800;
+}

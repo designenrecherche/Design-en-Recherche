@@ -1,0 +1,16 @@
+
+/*Contact*/
+
+.page-contact img{
+    width : 5%;
+    height : 5%;
+    opacity : 0.3;
+    transition: all 1s ease;
+}
+
+.page-contact img:hover{
+    opacity : 0.6;
+
+    transform:scale(1.1)
+    rotate(-360deg); 
+}
