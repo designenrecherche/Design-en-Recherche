@@ -13,6 +13,7 @@ blockquote{
     quotes: "«" "»";
 }
 
+
 .page        { 
     bottom:0; 
     padding-top: 120px;
@@ -160,6 +161,11 @@ nav #logoText{
     margin-right: 45%;
 }
 
+/* remove bootstrap native padding */
+.menu-items-collapse{
+    margin-left:-15px;
+}
+
 
 /* ITEMS */
 /*SUPPRIMER CONTOURS */
@@ -216,7 +222,13 @@ nav .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.ac
 h3.ss-titre{
     text-transform: uppercase;
     color : #475350;
-    border-bottom : 3px solid #475350;;
+    margin-top : 50px;
+    margin-bottom : 30px;
+}
+
+.ss-titre a{
+    color : inherit;
+    text-decoration: none;
 }
 
 .adviser{
@@ -299,4 +311,11 @@ h3.ss-titre{
     -webkit-animation:fadeIn 0.2s both ease-in;
     -moz-animation:fadeIn 0.2s both ease-in;
     animation:fadeIn 0.2s both ease-in;    
+}
+
+
+/* twitter */
+iframe{
+    width:100%!important;
+    font-family : 'Signika', 'sans-serif'!important;
 }
