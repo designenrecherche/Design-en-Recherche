@@ -49,7 +49,7 @@
     text-decoration : none;
 }
 
-.evenement p{
+.evenement p, .evenement ul{
     text-align : left;
 }
 
