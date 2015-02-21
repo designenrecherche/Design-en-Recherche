@@ -17,7 +17,7 @@ html  { overflow-y:hidden; }
     text-align:center;
     top:0;  
     width:100%; 
-    color : #475350; 
+    /*color : #475350; */
     overflow-x : hidden;
 }
 
@@ -290,13 +290,13 @@ h3.ss-titre{
 
 /* home -------------------------- */
 .page.ng-leave{
- -webkit-animation:scaleDown 0.5s both ease-out;
- -moz-animation:scaleDown 0.5s both ease-out;
- animation:scaleDown 0.5s both ease-out; 
+ -webkit-animation:fadeOut 0.2s both ease-out;
+ -moz-animation:fadeOut 0.2s both ease-out;
+ animation:fadeOut 0.2s both ease-out; 
 }
 
 .page.ng-enter{  
-    -webkit-animation:scaleUp 0.5s both ease-in;
-    -moz-animation:scaleUp 0.5s both ease-in;
-    animation:scaleUp 0.5s both ease-in;    
+    -webkit-animation:fadeIn 0.2s both ease-in;
+    -moz-animation:fadeIn 0.2s both ease-in;
+    animation:fadeIn 0.2s both ease-in;    
 }
