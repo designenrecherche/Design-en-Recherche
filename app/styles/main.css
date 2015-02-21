@@ -9,6 +9,9 @@ body{
 
 html  { overflow-y:hidden; }
 
+blockquote{
+    quotes: "«" "»";
+}
 
 .page        { 
     bottom:0; 

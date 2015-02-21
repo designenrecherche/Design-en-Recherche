@@ -52,9 +52,12 @@ angular
             templateUrl: 'views/projet.html',
             controller: 'ProjetCtrl'
         })
-      .when('/personne/:name', {
+      .when('/membres/:name', {
         templateUrl: 'views/personne.html',
         controller: 'PersonneNameCtrl'
+      })
+      .when('/personne/:name', {
+        redirectTo:'/membres/:name'
       })
       .when('/perdudanslebrouillarddudesign', {
         templateUrl: 'views/perdudanslebrouillarddudesign.html',
