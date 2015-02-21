@@ -42,7 +42,7 @@ html  { overflow-y:hidden; }
 .page .content-scrollable-container{
     top  : 0%;
     position : absolute;
-    height : 110%;
+    height : 100%;
     width : 100%;
     overflow-y : auto;
     overflow-x : hidden;
@@ -68,6 +68,7 @@ html  { overflow-y:hidden; }
 .page .content-scrollable-content{
     padding-top : 5%;
     padding-bottom : 10%;
+    margin-bottom : 20px;
 }
 
 
