@@ -122,7 +122,7 @@ html  { overflow-y:hidden; }
 
 /* MENU */
 nav{
-    z-index:1001;
+    z-index:1002;
     background-color : white!important;
     border : none!important
     ;
@@ -167,8 +167,6 @@ nav #logoText{
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>li>a{
     color : #475350;
-    /*padding:0;*/
-    /* margin :0;*/
 }
 
 
@@ -224,13 +222,12 @@ h3.ss-titre{
     /* border : 3px solid white;*/
     text-transform : uppercase;
     opacity : 0.9;
-
+    padding : 5px;
 }
 
 .adviser a{
     text-decoration : none;
     color : white;
-    padding : 5px;
 }
 .adviser:hover{
     opacity:1;
@@ -283,8 +280,8 @@ h3.ss-titre{
 /* ANIMATIONS
 ============================================================================= */
 
-.page.ng-leave  { z-index:9999; }
-.page.ng-enter  { z-index:8888; }
+.page.ng-leave  { z-index:800; }
+.page.ng-enter  { z-index:799; }
 
 /* page specific animations ------------------------ */
 

@@ -9,12 +9,6 @@
  */
 angular.module('derCleanApp')
   .controller('EvenementsMethodesCtrl', function ($scope) {
-    $scope.scrollTo = function(id){
-        console.log($('#designLogo svg').height())
-        $('.content-scrollable-container').animate({  
-            scrollTop: $(id).offset().top - $('#designLogo svg').height()
-        }, 'slow');  
-    };
 
     $scope.pageClass = 'page-methodes';
   });
