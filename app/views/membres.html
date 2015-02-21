@@ -26,19 +26,17 @@
 			
 			<!-- sélecteur pour le mode de classement des membres - à montrer quand suffisamment d'infos entrées par les membres -->
 
-			<!--
+			
 			    <div class="btn-group" dropdown is-open="status.isopen">
 			      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-			       	{{ 'ORDERBY' | translate}} {{ predicate }} <span class="caret"></span>
+			       	Ordonner par {{ predicate }} <span class="caret"></span>
 			      </button>
 			      <ul class="dropdown-menu" role="menu">
-			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'nom'">{{ 'DIRECTORYNAME' | translate}}</a></li>
-			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'laboratoire'">{{ 'DIRECTORYLAB' | translate}}</a></li>
-			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'etablissement'">{{ 'DIRECTORYUNIVERSITY' | translate}}</a></li>
-			        <li><a href="#" onclick="disableA(event)" ng-click="predicate = 'directeur'">{{ 'DIRECTORYSUPERVISOR' | translate}}</a></li>
+			        <li ng-click="predicate = 'nom'">Nom</li>
+			        <li ng-click="predicate = 'etablissement_1'">Établissement principal</li>
 			      </ul>
 			    </div>
-			-->
+		
 			</div>
 
 

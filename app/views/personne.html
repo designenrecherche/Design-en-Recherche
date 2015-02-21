@@ -2,8 +2,17 @@
 <div class='content-scrollable-container'>
 
 	<div class='content-scrollable-content'>
+		<aside class="profile-aside-left col-sm-3">
+			<img ng-src="http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/{{membre.identifiant}}.png" err-src="images/portrait.png" alt="">
+			<p>
+				<a href="javascript:history.back()"> retour à la page précédente</a> 
+			</p>
+			<p>
+				<a href="#membres"> retour à l'annuaire</a>
+			</p>
+		</aside>
 
-		<section class="col-sm-4 col-sm-offset-4 profile-main">
+		<section class="col-sm-6 profile-main">
 			<h2>{{membre.surname}} {{membre.name}}</h2>
 
 			<div ng-bind-html="buildAffiliation()"></div>
@@ -53,41 +62,25 @@
 
 
 		</section>
+		<aside class="profile-aside-right col-sm-3">
+			<div ng-show = "membre.minibio40carfr != ''">
+				<h4>Bio :</h4>
+				<p>
+					{{membre.minibio140carfr}}
+				</p>
+			</div>
 
-		
 
-
+			<div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>	
+			<div ng-show = "membre.e-mailpublic != ''">E-mail : {{membre.e-mailpublic}}</div>
+			<div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>	
+			<div ng-show = "membre.site != ''">Site principal : <a href="{{ membre.site }}">{{ membre.site }}</a></div>	
+			<div ng-show = "membre.sites">
+				<p>Autres sites :</p>
+				<p ng-repeat="site in membre.sites">
+					<a href="{{site.url}}">{{site.text}}</a>
+				</p>
+			</div>	
+		</aside>
 	</div>
 </div>
-
-
-<aside class="profile-aside-left col-sm-3">
-	<img ng-src="http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/{{membre.identifiant}}.png" err-src="images/portrait.png" alt="">
-	<p>
-		<a href="javascript:history.back()"> retour à la page précédente</a> 
-	</p>
-	<p>
-		<a href="#membres"> retour à l'annuaire</a>
-	</p>
-</aside>
-
-<aside class="profile-aside-right col-sm-3 col-sm-offset-5">
-	<div ng-show = "membre.minibio40carfr != ''">
-		<h4>Bio :</h4>
-		<p>
-			{{membre.minibio140carfr}}
-		</p>
-	</div>
-
-
-	<div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>	
-	<div ng-show = "membre.e-mailpublic != ''">E-mail : {{membre.e-mailpublic}}</div>
-	<div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>	
-	<div ng-show = "membre.site != ''">Site principal : <a href="{{ membre.site }}">{{ membre.site }}</a></div>	
-	<div ng-show = "membre.sites">
-		<p>Autres sites :</p>
-		<p ng-repeat="site in membre.sites">
-			<a href="{{site.url}}">{{site.text}}</a>
-		</p>
-	</div>	
-</aside>

@@ -3,6 +3,10 @@ h4{
 	margin-bottom: 0;
 }
 
+.profile-aside-left,.profile-aside-right{
+	/*padding-top : 6%;*/
+}
+
 .profile-aside-left{
 	text-align : left;
 	padding-left : 3%;
