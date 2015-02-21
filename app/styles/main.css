@@ -9,8 +9,15 @@ body{
 
 html  { overflow-y:hidden; }
 
-blockquote{
+*{
     quotes: "«" "»";
+}
+
+.loader-img{
+}
+.loader-img img{
+     width : 60px;
+     display:inline;
 }
 
 

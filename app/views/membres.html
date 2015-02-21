@@ -2,76 +2,86 @@
 
 <div class='content-scrollable-container'>
 
-<div class='content-scrollable-content'>
-
-				
-
-
-	<div ng-controller="AnnuaireCtrl" class='annuaire-container'>
-
-
-		<h2>{{ 'MEMBERSNAV' | translate }}</h2>
+	<div class='content-scrollable-content'>
 
 
 
 
-		<div class="row mar-bot30 interface-container"  style='text-align : center;'>
+		<div ng-controller="AnnuaireCtrl" class='annuaire-container'>
+
+
+			<h2>{{ 'MEMBERSNAV' | translate }}</h2>
+
+
+
+
+			<div class="row interface-container">
 				<div class="col-md-12"   style='text-align : center;'>
-			<!--controles -->
-			<div style='display:inline-block;'>
-			    <form class="form-inline"  style='text-align : center;'>
-			      <input ng-model="query" type="text"
-			        placeholder="{{ 'SEARCHTEXT' | translate }}" autofocus>
-			    </form>
-			
-			<!-- sélecteur pour le mode de classement des membres - à montrer quand suffisamment d'infos entrées par les membres -->
+					<!--controles -->
+					<div style='display:inline-block;'>
+						<form class="form-inline"  style='text-align : center;'>
+							<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							<input class="animate" ng-model="query" type="text"
+							placeholder="{{ 'SEARCHTEXT' | translate }}" autofocus>
+						</form>
 
-			
-			    <div class="btn-group" dropdown is-open="status.isopen">
-			      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-			       	Ordonner par {{ predicate }} <span class="caret"></span>
-			      </button>
-			      <ul class="dropdown-menu" role="menu">
-			        <li ng-click="predicate = 'nom'">Nom</li>
-			        <li ng-click="predicate = 'etablissement_1'">Établissement principal</li>
-			      </ul>
-			    </div>
-		
+						<!-- sélecteur pour le mode de classement des membres - à montrer quand suffisamment d'infos entrées par les membres -->
+						<!--
+
+						<div class="btn-group" dropdown is-open="status.isopen">
+							<button type="button" class="btn btn-primary" ng-disabled="disabled" ng-click="predicate = 'name'">
+								Classer par nom
+							</button>
+							<button type="button" class="btn btn-primary" ng-disabled="disabled" ng-click="predicate = 'etablissement_1'">
+								Classer par établissement principal
+							</button>
+						-->
+
+					</div>
+
+
+				</div><!-- <div class="col-md-offset-5 col-md-5"> -->
+
 			</div>
 
-
-
-		</div><!-- <div class="col-md-offset-5 col-md-5"> -->
-
-	</div>
-
 			
-	<div class="row mar-bot40">
-		<div class="col-md-offset-1 col-md-10">
+			<div class="row">
+				<div class="col-md-offset-3 col-md-6">
+					<div ng-if="membres === undefined"class="loader-img">
+						<img src="images/loader.gif" alt="" style="display:inline">
+					</div>
 
 
-		    <div  class="annuaire-tile" ng-repeat="membre in membres | filter:query | orderBy:predicate">
+					<div  class="annuaire-tile animate" ng-repeat="membre in membres | filter:query | orderBy:predicate">
+						<a ng-href="#/membres/{{membre.identifiant}}">
+						<table>
+							<tr>
+								<td>
+									<img ng-src="http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/{{membre.identifiant}}.png"  err-src="images/portrait.png" alt="">
+								</td>
+								<td>
+									<h3>	
+										<person>{{membre.surname}} {{membre.name}}</person>
+									</h3>
+								<p ng-if="membre.etablissement1 || membre.etablissement2 || membre.etablissement3">
+									<span ng-if="membre.etablissement1">{{membre.etablissement1}}</span>
+									<span ng-if="membre.etablissement2">, {{membre.etablissement2}}</span>
+									<span ng-if="membre.etablissement3">, {{membre.etablissement3}}</span>.
+								</p>
+							</td>
+						</tr>
+					</table>
 
-		    	<div class="" ng-mouseover="showInLogo(membre.identifiant)"
-		    		ng-mouseleave="hideMembersLogo()"
-		    	>
-		    		<a href="#membres/{{membre.identifiant}}">
-					 	
-					      	<h3>
-					      		
-					      	<person>{{membre.surname}} {{membre.name}}</person> /
-					      		
-					      	</h3>
-					    
+
 					</a>
+
+					</div>
+
 				</div>
-		      </div>
 
-		  </div>
+			</div><!--row -->
 
-</div><!--row mar-bot40 -->
 
-				
-</div><!--row mar-bot40-->
-</div><!--content-scrollable-content -->
+		</div><!--row mar-bot40-->
+	</div><!--content-scrollable-content -->
 </div><!-- content-scrollable-container -->

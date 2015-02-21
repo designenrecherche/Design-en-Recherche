@@ -13,6 +13,18 @@
     margin-left : 5px;
 }
 
+.annuaire-container input{
+    background : none;
+    border : none;
+    font-size:1.3em;
+}
+
+.annuaire-container input:focus{
+    padding-left : 10px;
+    border : none;
+    outline: 0;
+}
+
 
 .annuaire-container .btn-group open button{
     opacity : 0.5;
@@ -35,32 +47,43 @@
     opacity : 0.5;
 }
 
+
+/*annuaire tile*/
 .annuaire-tile{
     text-align : left;
     padding : 10px;
-    display : inline-block;
+    opacity : 1;
+}
+
+.annuaire-tile:hover{
+    background : rgba(0,0,0,0.2);
+}
+
+.annuaire-tile td:first-child{
+    padding-right : 10px;
+}
+
+.annuaire-tile img{
+    width : 60px;
+    display:inline;
+    border-radius : 50%;
 }
 
 .annuaire-tile a{
     color : black;
     text-decoration: none;
-    border-top : 3px solid black;
-    border-bottom : 3px solid black;
 }
 
 .annuaire-tile h3{
     font-size : 1.1em;
     text-transform: uppercase;
-    text-align : center;
 }
 
-.annuaire-tile ul{
-    margin : 0px;
-    padding : 0px;
+.annuaire-tile.ng-leave{
+    opacity : 0;
+    height:0;
 }
-
-.annuaire-tile li{
-    list-style-type : none;
-    padding-left : 0px;
-    margin-left : 0px;
+.annuaire-tile.ng-enter{
+    opacity : 0;
+    height:0;
 }

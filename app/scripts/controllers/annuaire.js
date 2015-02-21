@@ -12,5 +12,7 @@ angular.module('derCleanApp')
     $rootScope.$watch('annuaireData', function(){
     	if($rootScope.annuaireData)
     		$scope.membres = $rootScope.annuaireData;
+
+    	console.log($scope.membres);
     });
   });

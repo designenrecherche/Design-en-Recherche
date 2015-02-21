@@ -37,9 +37,9 @@
       			var id = findInAnnuaire(element.text(), $rootScope.annuaireData);
       			if(id){
       				element.attr('id', id);
-      				var text = element.text();
-      				var a = angular.element('<a href="#membres/'+id+'">'+text+'</a>');
-      				element.text('');
+      				var html = element.html();
+      				var a = angular.element('<a href="#membres/'+id+'">'+html+'</a>');
+      				element.html('');
       				element.append(a);
       			}
       		}
