@@ -25,61 +25,27 @@ angular.module('derCleanApp')
     	//true = returns all the tabs
     	//String = returns the "tab" tab in the spreadsheet
     	//false/undefined = returns the first tab
-    	if(tab){
-    		//complex spreadsheet, you take everything
-    		if(typeof tab === "boolean"){
-
-    			Tabletop.init({
-			        key: k,
-			        callback: function(data, tabletop) {
-			          if(callback && typeof(callback) === "function") {
-			            $rootScope.$apply(function() {
-			              return callback(data, name);
-			            })
-			          }
-			        },
-			        simpleSheet: tab,
-			        parseNumbers: true
-		      	});
-
-
-    		//complex spreadsheet, you take just the tab name given as argument
-    		}else{
-
-
-    			Tabletop.init({
-			        key: k,
-			        callback: function(data, tabletop) {
-			          if(callback && typeof(callback) === "function") {
-			            $rootScope.$apply(function() {
-			              return callback(data[tab+""], name);
-			            })
-			          }
-			        },
-			        simpleSheet: false,
-			        parseNumbers: true
-		      	});
-
-    		}
-
-    	//simple spreadsheet, you just take the first tab and let it go baby
-    	}else{
-
+    	var callTabletop = function(callback, k, tabMode, tab, name){
     		Tabletop.init({
 			        key: k,
 			        callback: function(data, tabletop) {
 			          if(callback && typeof(callback) === "function") {
 			            $rootScope.$apply(function() {
-			              return callback(data, name);
+			            	if(tab)
+			            		return callback(data[tab], name);
+			              	else 
+			              		return callback(data, name);
 			            })
 			          }
 			        },
-			        simpleSheet: false,
+			        simpleSheet: tabMode,
 			        parseNumbers: true
 		      	});
-
-    	}
-    }
+    	};
+    	var tabMode = (typeof tab === 'boolean')? tab:false;
+    	var tab = (typeof tab === 'string')? tab:undefined;
+    	callTabletop(callback, k, tabMode, tab, name);
+    };
 
     
 
