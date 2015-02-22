@@ -108,7 +108,7 @@
 						}
 					}
 				});
-				console.log("data loaded from annuaire");
+				//console.log("data loaded from annuaire");
 				der.fillNodes();
 				der.faisLePaon();
 			};
@@ -135,6 +135,11 @@
 				//TODO : add clip to have rounded images
 				a.append('image').attr('x', 0).attr('y', 0)
 				.attr('width', 0).attr('height', 0).attr('xlink:href', 'images/portrait.png');
+
+
+				//cache with ellispse
+				der.node.append('circle').attr('class', 'cache').attr('cx', 0).attr('cy', 0).attr('stroke', 'black').attr('stroke-width',1).attr('fill-opacity', 0).attr('r', der.mediumRadius);
+
 				
 				der.node.each(function(d){
 					d.imagePath = "http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/"+d.identifiant + ".png";
@@ -154,16 +159,16 @@
 					d3.select(this).each(nodeUp);
 					var da = d;
 					//TODO : handle through angular the header's title text
-					/*d3.select('#logoText a').text(function(d){
+					d3.select('#logoText a').text(function(d){
 						if(da.surname != undefined)
 							return da.surname + ' ' +da.name;
-						else return "annuaire en cours de chargement";
-					});*/
+						else return "membre du réseau non enregistré sur notre annuaire";
+					});
 
 				}).on('mouseout', function(){
 						d3.select(this).each(nodeDown);
 							//TODO : handle through angular the header's title text
-							//d3.select('#logoText a').text("design en recherche");
+							d3.select('#logoText a').text("design en recherche");
 				});
 			};
 
@@ -183,15 +188,15 @@
 			function nodeUp(){
 				var data;
 				d3.select(this).call(function(d){data = d[0][0].__data__;})
-				d3.select(this).select('.forme').transition().attr('r', der.bigRadius*1.3).attr('fill', 'black');
+				d3.select(this).selectAll('.forme,.cache').transition().attr('r', der.bigRadius*1.3).attr('fill', 'black').attr('stroke-width', 8);
 				d3.select(this).select('image').transition()
-				.attr('x', -der.bigRadius).attr('y', -der.bigRadius)
-				.attr('width', der.bigRadius*2).attr('height', der.bigRadius*2);
+				.attr('x', -der.bigRadius+2).attr('y', -der.bigRadius+2)
+				.attr('width', der.bigRadius*2-4).attr('height', der.bigRadius*2-4);
 				return this;
 			};
 
 			function nodeDown(){
-				d3.select(this).select('.forme').transition().attr('r', der.mediumRadius).attr('fill', '#475350');
+				d3.select(this).selectAll('.forme,.cache').transition().attr('r', der.mediumRadius).attr('fill', '#475350').attr('stroke-width', 1);				
 				d3.select(this).select('image').transition()
 				.attr('x', 0).attr('y', 0).attr('width', 0).attr('height', 0);
 				return this;
@@ -200,9 +205,9 @@
 			//show off animation
 			this.faisLePaon = function(){
 				if(der.node){
-					console.log("je fais le paon!!!");
+					//console.log("je fais le paon!!!");
 					var length = der.node[0].length;
-					var interval = 1000/length;
+					var interval = 2000/length;
 					der.node.each(function(d,i){
 						if(d.identifiant)
 							d3.select(this).transition().delay(i*interval).each(nodeUp).each('end', nodeDown);

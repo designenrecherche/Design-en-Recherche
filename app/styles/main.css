@@ -135,8 +135,7 @@ html  { overflow-y:hidden; }
 nav{
     z-index:1002;
     background-color : white!important;
-    border : none!important
-    ;
+    border : none!important;
 }
 
 .navbar-nav{
@@ -165,7 +164,13 @@ nav #logoText{
 
 /*version minified small screens */
 .navbar-toggle{
-    margin-right: 45%;
+    margin-right: 44.5%;
+    border : none!important;
+}
+
+.navbar-toggle:hover{
+    background-color : none!important;
+    font-weight:800;
 }
 
 /* remove bootstrap native padding */

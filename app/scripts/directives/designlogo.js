@@ -28,9 +28,7 @@ angular.module('derCleanApp')
 
         //hiding all nodes when changing route
         $rootScope.$on('$routeChangeStart', function(){
-          console.log("route change start");
           der.hideAll();
-          //$rootScope.activeMemberId = "";
         });
       }
     };
