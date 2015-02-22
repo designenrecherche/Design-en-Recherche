@@ -135,20 +135,16 @@
 				//TODO : add clip to have rounded images
 				a.append('image').attr('x', 0).attr('y', 0)
 				.attr('width', 0).attr('height', 0).attr('xlink:href', 'images/portrait.png');
-
-
 				//cache with ellispse
-				der.node.append('circle').attr('class', 'cache').attr('cx', 0).attr('cy', 0).attr('stroke', 'black').attr('stroke-width',1).attr('fill-opacity', 0).attr('r', der.mediumRadius);
+				a.append('circle').attr('class', 'cache').attr('cx', 0).attr('cy', 0).attr('stroke', 'black').attr('stroke-width',0).attr('fill-opacity', 0).attr('r', der.mediumRadius);
 
 				
 				der.node.each(function(d){
 					d.imagePath = "http://googledrive.com/host/0B8drr1YUb3a7RFBTWW1FVXhIdTA/"+d.identifiant + ".png";
 					var el = this;
 					imageExists(d.imagePath, function(){
-						console.log("ok "+d.identifiant);
 						d3.select(el).selectAll('image').attr('xlink:href', d.imagePath);
 					}, function(){
-						console.log("error "+d.identifiant);
 						d3.select(el).selectAll('image').attr('xlink:href','images/portrait.png');
 					});
 				});
@@ -196,7 +192,7 @@
 			};
 
 			function nodeDown(){
-				d3.select(this).selectAll('.forme,.cache').transition().attr('r', der.mediumRadius).attr('fill', '#475350').attr('stroke-width', 1);				
+				d3.select(this).selectAll('.forme,.cache').transition().attr('r', der.mediumRadius).attr('fill', '#475350').attr('stroke-width', 0);				
 				d3.select(this).select('image').transition()
 				.attr('x', 0).attr('y', 0).attr('width', 0).attr('height', 0);
 				return this;
