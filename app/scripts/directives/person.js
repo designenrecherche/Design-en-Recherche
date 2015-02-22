@@ -19,7 +19,6 @@
   	}
   	//find someone annuaire's id basing on her naturally spelled name and surname
   	function findInAnnuaire(text, annuaire){
-  		console.log(text);
   		for(var i in annuaire){
   			var name = annuaire[i].name;
   			if(slugify(text).indexOf(slugify(name)) > -1){
@@ -35,6 +34,7 @@
       	$rootScope.$watch('annuaireData', function(){
       		if($rootScope.annuaireData){
       			var id = findInAnnuaire(element.text(), $rootScope.annuaireData);
+
       			if(id){
       				element.attr('id', id);
       				var html = element.html();
@@ -47,14 +47,15 @@
 
       	element.on('mouseover', mouseover);
       	function mouseover(){
+          var id = angular.element(element).attr('id');
       		//updating the active member id
-      		if(element.attr('id'))
-      			$rootScope.activeMemberId = element.attr('id');
-      		else $rootScope.activeMemberId = "";
+      		if(id)
+      			$rootScope.$broadcast('activeMemberId', id);
+      		else $rootScope.$broadcast('activeMemberId', "");
       	}
       	element.on('mouseout', function(){
       		$document.off('mouseover', mouseover);
-      		$rootScope.activeMemberId = "";
+      		$rootScope.$broadcast('activeMemberId', "");
       	})
       }
   };

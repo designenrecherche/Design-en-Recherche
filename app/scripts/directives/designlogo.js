@@ -20,11 +20,17 @@ angular.module('derCleanApp')
         		der.updateData($rootScope.annuaireData);
         });
 
-        $rootScope.$watch('activeMemberId', function(){
-          console.log($rootScope.activeMemberId);
-          if($rootScope.activeMemberId)
-            der.showNodeById($rootScope.activeMemberId);
+        $rootScope.$on('activeMemberId', function(evt, activeMemberId){
+          if(activeMemberId.length > 0)
+            der.showNodeById(activeMemberId);
           else der.hideAll();
+        });
+
+        //hiding all nodes when changing route
+        $rootScope.$on('$routeChangeStart', function(){
+          console.log("route change start");
+          der.hideAll();
+          //$rootScope.activeMemberId = "";
         });
       }
     };

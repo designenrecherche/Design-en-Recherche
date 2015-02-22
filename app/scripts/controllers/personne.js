@@ -17,7 +17,6 @@ angular.module('derCleanApp')
     	if($rootScope.annuaireData){
     		$scope.membre = findMember(slugActive);
     		formatMembre();
-    		console.log($scope.membre);
     	}
     		
     });
