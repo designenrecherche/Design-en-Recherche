@@ -138,9 +138,7 @@ nav{
     border : none!important;
 }
 
-.navbar-nav{
-    float : none;
-}
+
 nav a{
     font-family : 'signika';
     text-transform : uppercase;
