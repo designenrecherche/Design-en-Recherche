@@ -156,7 +156,7 @@ nav a{
 
 .navbar-nav {
     display : inline-block;
-    float: center;
+    float: inherit!important;
 }
 nav #logoText{
     font-weight : 800;
