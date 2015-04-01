@@ -21,7 +21,7 @@ angular
   ])
   .config(function ($routeProvider, $translateProvider, AngularyticsProvider) {
     
-    AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
+    //AngularyticsProvider.setEventHandlers(['Console', 'GoogleUniversal']);
 
     $routeProvider
       .when('/', {
