@@ -204,7 +204,7 @@ angular
 
     $translateProvider.preferredLanguage('fr');
   })
-.run(function(Angularytics) {
+  .run(function(Angularytics) {
     Angularytics.init();
   });
 
