@@ -71,7 +71,12 @@
 }
 /* end titre/en-tête page */
 
+/* comite d'organisation */
 
+.comite li{
+    text-align : center;
+    list-style : none;
+}
 
 /* programmes */
 .evenement .program table{

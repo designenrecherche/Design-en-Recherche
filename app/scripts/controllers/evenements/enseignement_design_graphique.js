@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name derCleanApp.controller:ProjetCtrl
+ * @name derCleanApp.controller:EvenementsEnseignementDesignGraphiqueCtrl
  * @description
- * # ProjetCtrl
+ * # EvenementsEnseignementDesignGraphiqueCtrl
  * Controller of the derCleanApp
  */
 angular.module('derCleanApp')
-  .controller('ProjetCtrl', function ($scope) {
+  .controller('EvenementsEnseignementDesignGraphiqueCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

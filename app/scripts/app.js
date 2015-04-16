@@ -45,13 +45,17 @@ angular
         controller: 'EvenementsCtrl'
       })
       .when('/evenements/methodes', {
-        templateUrl: 'views/methodes.html',
+        templateUrl: 'views/evenements/methodes.html',
         controller: 'EvenementsMethodesCtrl'
       })
       .when('/evenements/projet', {
-            templateUrl: 'views/projet.html',
+            templateUrl: 'views/evenements/projet.html',
             controller: 'ProjetCtrl'
         })
+      .when('/evenements/enseignement_design_graphique', {
+        templateUrl: 'views/evenements/enseignement_design_graphique.html',
+        controller: 'EvenementsEnseignementDesignGraphiqueCtrl'
+      })
       .when('/membres/:name', {
         templateUrl: 'views/personne.html',
         controller: 'PersonneNameCtrl'
@@ -62,6 +66,10 @@ angular
       .when('/perdudanslebrouillarddudesign', {
         templateUrl: 'views/perdudanslebrouillarddudesign.html',
         controller: 'PerdudanslebrouillarddudesignCtrl'
+      })
+      .when('/evenements/enseignement_design_graphique', {
+        templateUrl: 'views/evenements/enseignement_design_graphique.html',
+        controller: 'EvenementsEnseignementDesignGraphiqueCtrl'
       })
       .otherwise({
         redirectTo: '/perdudanslebrouillarddudesign'

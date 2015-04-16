@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: ProjetCtrl', function () {
+describe('Controller: EvenementsEnseignementDesignGraphiqueCtrl', function () {
 
   // load the controller's module
   beforeEach(module('derCleanApp'));
 
-  var ProjetCtrl,
+  var EvenementsEnseignementDesignGraphiqueCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ProjetCtrl = $controller('ProjetCtrl', {
+    EvenementsEnseignementDesignGraphiqueCtrl = $controller('EvenementsEnseignementDesignGraphiqueCtrl', {
       $scope: scope
     });
   }));
