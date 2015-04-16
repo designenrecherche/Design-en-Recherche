@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'pascalprecht.translate',
-    'angularytics'
+    'angularytics',
+    'pdf'
   ])
   .config(function ($routeProvider, $translateProvider, AngularyticsProvider) {
     

@@ -8,10 +8,10 @@
  * Controller of the derCleanApp
  */
 angular.module('derCleanApp')
-  .controller('EvenementsEnseignementDesignGraphiqueCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('EvenementsEnseignementDesignGraphiqueCtrl', function ($scope, $timeout, pdfDelegate) {
+  	/*$timeout(function(){
+  		pdfDelegate
+	    .$getByHandle('pdf-container')
+	    .load('pdf/enseigner-designer.pdf');
+  	});*/
   });
