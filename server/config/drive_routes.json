@@ -1,0 +1,18 @@
+{
+  "evenements" : {
+    "type" : "spreadsheet",
+    "gurl" : "https://docs.google.com/spreadsheets/d/1_pAgEDIqh-0CbbwM1vMMyzHc3okOwnxB_WdyvU34FqU/pubhtml"
+  },
+  "a-propos" : {
+    "type" : "text",
+    "gurl" : "https://docs.google.com/document/d/1HwpfzFPXJyt8ZF9s1ZsUKbTqVJnubdQTTgTUpW6pW-0/pub"
+  },
+  "nous-contacter" : {
+    "type" : "text",
+    "gurl" : "https://docs.google.com/document/d/1TV-bwevyS5QaMS7Kqj2Bs58MWwKqwni-OQlaHBdq3Fg/pub"
+  },
+  "annuaire" : {
+    "type" : "spreadsheet",
+    "gurl" : "https://docs.google.com/spreadsheets/d/1NovUo_thjsK3GqU3WuBx5Oghe0cEt-qoAtjVQFOez2U/pubhtml"
+  }
+}
