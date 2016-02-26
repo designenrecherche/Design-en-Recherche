@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var utils = require('./../../utils/drive-utils.js');
 
 // Get list of contacts
 exports.index = function(req, res) {

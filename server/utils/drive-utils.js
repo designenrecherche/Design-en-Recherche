@@ -48,6 +48,7 @@ var cleanHTMLContent = function(raw){
 
   var $ = cheerio.load(raw);
   var contents = $('body #contents');
+  contents.find('*').removeClass();
   contents.find('style').remove();
   contents.find('script').remove();
   contents.find('a').attr('target', '_blank')
@@ -148,6 +149,9 @@ var parseGObject = function(object, callback){
   async.map(props, function(i, c){
     //extract google content
     if(i.indexOf('gurl') > -1){
+      if(!object[i].length){
+        return c(undefined, {key:'content',value:undefined});
+      }
       var attr = "";
       var split = i.split('_');
       if(split.length > 1){
@@ -159,6 +163,7 @@ var parseGObject = function(object, callback){
       if(object.type === 'spreadsheet' && !object[key]){
         fetchGDSpreadsheet(object[i], function(err, data){
           if(err){
+            console.log('error in fetching ', object[i], err);
             c(err, {key : i, value : object[i]});
           }else{
             //recursively get contents
@@ -170,6 +175,7 @@ var parseGObject = function(object, callback){
       }else if(!object[key]){
         fetchGDText(object[i], function(err, data){
           if(err){
+            console.log('error in fetching ', object[i], err);
             c(err, {key : i, value : object[i]});
           }else{
             c(undefined, {key : key, value : data});
@@ -180,6 +186,53 @@ var parseGObject = function(object, callback){
       var keywords = object[i].split(',');
       keywords.forEach(function(keyword, i){keywords[i] = keyword.trim()});
       c(undefined, {key : i , value : keywords});
+    //parse persons and their urls
+    }else if(i.indexOf('personnes') > -1){
+
+      var persons = [],
+          raw = object[i].split(','),
+          match;
+
+      raw.forEach(function(entry){
+        var infos = entry.trim().split('('), person = {};
+        person.completeName = infos.shift().trim();
+        if(!person.completeName.length){
+          return;
+        }
+        var names = person.completeName.split(' ');
+        person.surname = names.shift();
+        person.name = names.join(' ');
+        if(infos.length){
+          person.url = infos[0].substr(0, infos[0].length - 1).trim();
+        }
+
+        // console.log(person);
+        persons.push(person);
+      });
+
+
+      c(undefined, {key : i, value : persons});
+    }else if(i.indexOf('membres') > -1){
+
+      var persons = [],
+          raw = object[i].split(',');
+
+      raw.forEach(function(entry){
+        if(!entry.trim().length){
+          return;
+        }
+        var person = {};
+        person.completeName = entry.trim();
+        var names = entry.split(' ');
+        person.surname = names.shift();
+        person.name = names.join(' ');
+
+        // console.log(person);
+        persons.push(person);
+      });
+
+
+      c(undefined, {key : i, value : persons});
     }else{
       c(undefined, {key : i, value : object[i]});
     }
@@ -246,6 +299,38 @@ var fetchProfileImages = function(data, callback){
   });
 }
 
+var parsePersons = function(content, persons, classe){
+  var lowContent = content.toLowerCase();
+  persons.forEach(function(person){
+    if(lowContent.indexOf(person.completeName.toLowerCase()) > -1){
+      index = lowContent.indexOf(person.completeName.toLowerCase());
+      if(classe === 'invite')
+        console.log('match : ', person);
+      if(person.url){
+        span = '<a class="person '+ classe + '" person="'
+                +person.completeName
+                +'" itemscope itemtype="http://schema.org/Person" '
+                +'href="'+person.url+'" '
+                +'>'
+                +'<span class="person-surname" itemprop="givenName">' + person.surname
+                +'</span> <span class="person-name" itemprop="familyName">' + person.name
+                +'</span></a>';
+        console.log(span);
+      }else{
+        span = '<span class="person '+ classe + '" person="'
+                +person.completeName
+                +'" itemscope itemtype="http://schema.org/Person">'
+                +'<span class="person-surname" itemprop="givenName">' + person.surname
+                +'</span> <span class="person-name" itemprop="familyName">' + person.name
+                +'</span></span>';
+      }
+      content = content.substr(0, index) + span + content.substr(index + person.completeName.length, content.length - 1);
+    }
+  });
+  // console.log(content);
+  return content;
+}
+
 var parsePersonsInDocuments = function(data, callback){
   var members = [], span, index;
   var ok = data.annuaire && data.annuaire.gContent;
@@ -262,39 +347,19 @@ var parsePersonsInDocuments = function(data, callback){
 
   for(var i in data){
     if(data[i].type === 'text'){
-      var content = data[i].gContent.toLowerCase();
-      members.forEach(function(member){
-        if(content.indexOf(member.completeName) > -1){
-          index = content.indexOf(member.completeName);
-          span = '<span class="person" person="'
-                  +member.completeName
-                  +'" itemscope itemtype="http://schema.org/Person">'
-                  +'<span class="person-surname" itemprop="givenName">' + member.surname
-                  +'</span> <span class="person-name" itemprop="familyName">' + member.name
-                  +'</span></span>';
-          data[i].gContent = data[i].gContent.substr(0, index) + span + data[i].gContent.substr(index + member.completeName.length, data[i].gContent.length - 1);
-        }
-      });
+      data[i].gContent = parsePersons(data[i].gContent, members, 'membre');
     }else if(data[i].type === 'spreadsheet'){
       for(var j in data[i].gContent){
         var content = data[i].gContent[j].gContent_contenu;
-        if(!content){
-          continue;
-        }else{
-          content = content.toLowerCase();
-        }
-        members.forEach(function(member){
-          if(content.indexOf(member.completeName) > -1){
-            index = content.indexOf(member.completeName);
-            span = '<span class="person" person="'
-                    +member.completeName
-                    +'" itemscope itemtype="http://schema.org/Person">'
-                    +'<span class="person-surname" itemprop="givenName">' + member.surname
-                    +'</span> <span class="person-name" itemprop="familyName">' + member.name
-                    +'</span></span>';
-            data[i].gContent[j].gContent_contenu = data[i].gContent[j].gContent_contenu.substr(0, index) + span + data[i].gContent[j].gContent_contenu.substr(index + member.completeName.length, data[i].gContent[j].gContent_contenu.length - 1);
+        var participants = data[i].gContent[j].personnes_participantes;
+        if(content){
+          data[i].gContent[j].gContent_contenu = parsePersons(data[i].gContent[j].gContent_contenu, members, 'membre');
+          if(participants){
+            data[i].gContent[j].gContent_contenu = parsePersons(data[i].gContent[j].gContent_contenu, participants, 'invite');
           }
-        });
+        }else{
+          continue;
+        }
       }
     }
   }
@@ -302,6 +367,42 @@ var parsePersonsInDocuments = function(data, callback){
   console.log('done with members identification');
 
   callback(undefined, data);
+}
+
+var dateAndNext = function(data, callback){
+  console.log('parsing events dates');
+  var evts = data.evenements && data.evenements.gContent;
+  if(!evts){
+    return callback(undefined, data);
+  }else{
+    evts = evts.map(function(evt){
+      if(!evt.date.length){
+        return evt;
+      }
+      var dateComponents = evt.date.split('/');
+      if(dateComponents.length === 1){
+        dateComponents = evt.date.split('-');
+      }
+
+      var date = new Date(dateComponents[2], +dateComponents[1]-1, dateComponents[0], 0,0,0,0);
+      evt.date = date;
+      return evt;
+    });
+
+
+    var now = new Date(), nextEvts;
+
+    nextEvts = evts.filter(function(evt){
+      return evt.date > now && evt.index_visible === 'oui';
+    });
+
+    if(nextEvts){
+      data.nextEvts = nextEvts;
+      console.log('next events', nextEvts);
+    }
+
+    return callback(undefined, data);
+  }
 }
 
 
@@ -321,6 +422,7 @@ var refreshData = function(){
           }
         });
       },
+      dateAndNext,
       //compare pages contents with organization members directory
       parsePersonsInDocuments,
       //fetch google public profile images, replace by default if not set
@@ -353,6 +455,62 @@ var renderGData = function(){
   }
 }
 
+
+var searchExpressionIn = function(expression, item, matches, path){
+  if(typeof item === 'string'){
+    if(item.toLowerCase().indexOf(expression) > -1){
+      // console.log('found', expression, ' in ', path, ', value : ', item);
+      matches.push({
+        path : path,
+        value : item
+      });
+    }
+  }else if(typeof item === 'object'){
+    for(var i in item){
+      var newPath = (path.length)?path.concat([''+i]):[''+i];
+      matches = searchExpressionIn(expression, item[i], matches, newPath);
+    }
+  }
+  return matches;
+}
+
+var searchExpression = function(expression){
+  expression = expression.toLowerCase();
+  console.log('searching ', expression);
+  if(!driveData){
+    return [];
+  }
+  var matches = searchExpressionIn(expression, driveData, [], []);
+
+  matches.forEach(function(match){
+    match.jointPath = match.path.join('/');
+    match.contextPath = (match.path.length > 3)?match.path.slice(0, 2).join('/'):match.path.slice(0, match.path.length - 2).join('/');
+    if(match.path.length > 3){
+      match.context = tree.select(match.path.slice(0, 2)).get();
+    }else{
+      match.context = tree.select(match.path.slice(0, match.path.length - 2)).get();
+    }
+    match.score = 1;
+  });
+
+  //removing duplicates
+  if(matches.length > 1){
+    for(var i = (matches.length - 1) ; i >= 1 ; i--){
+      for(var j = i - 1 ; j >= 0 ; j--){
+        if(matches[i].contextPath === matches[j].contextPath){
+          console.log('removing duplicate ', matches[i].contextPath);
+          matches[j].score ++;
+          matches.splice(matches[i], 1);
+          i--;
+          j--;
+        }
+      }
+    }
+  }
+
+
+  return matches;
+}
 
 /*
 DIVERSE UTILS
@@ -388,5 +546,6 @@ utils.renderGData = renderGData;
 utils.fetchGDText = fetchGDText;
 utils.fetchGDSpreadsheet = fetchGDSpreadsheet;
 utils.getDriveRefreshRate = getDriveRefreshRate;
+utils.searchExpression = searchExpression;
 
 module.exports = utils;
