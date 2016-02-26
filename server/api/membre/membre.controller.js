@@ -9,9 +9,9 @@ exports.index = function(req, res) {
   if(req.params.id){
     var annuaire = utils.renderGData('annuaire', 'gContent'),
         membre;
-
-    if(!annuaire){
-      res.json({});
+    var ok = annuaire && annuaire.length;
+    if(!ok){
+      return res.json({});
     }
 
     annuaire.some(function(membre){

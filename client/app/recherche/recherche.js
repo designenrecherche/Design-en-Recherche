@@ -5,6 +5,7 @@ angular.module('designEnRechercheApp')
     $routeProvider
       .when('/recherche', {
         templateUrl: 'app/recherche/recherche.html',
-        controller: 'RechercheCtrl'
+        controller: 'RechercheCtrl',
+        reloadOnSearch: false
       });
   });

@@ -5,10 +5,14 @@
   },
   "a-propos" : {
     "type" : "text",
+    "title" : "À propos",
+    "slug" : "a-propos",
     "gurl" : "https://docs.google.com/document/d/1HwpfzFPXJyt8ZF9s1ZsUKbTqVJnubdQTTgTUpW6pW-0/pub"
   },
   "nous-contacter" : {
     "type" : "text",
+    "title" : "Nous contacter",
+    "slug":"contact",
     "gurl" : "https://docs.google.com/document/d/1TV-bwevyS5QaMS7Kqj2Bs58MWwKqwni-OQlaHBdq3Fg/pub"
   },
   "annuaire" : {
@@ -17,10 +21,14 @@
   },
   "introduction" : {
     "type" : "text",
+    "title" : "Introduction",
+    "slug":"",
     "gurl" : "https://docs.google.com/document/d/1_WFGJ_uYFYRuuMG80-B8zOaTrxGA1mfWDhII5vy3SjM/pub"
   },
   "reseaux" : {
     "type" : "spreadsheet",
+    "title" : "Nous contacter",
+    "slug":"contact",
     "gurl" : "https://docs.google.com/spreadsheets/d/1dhJv-5DhgXugOrXIzN5-zpLYugKvL2eVCckINPenNQM/pubhtml"
   }
 }

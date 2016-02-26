@@ -301,9 +301,7 @@ var fetchProfileImages = function(data, callback){
 
 
 var parsePersons = function(content, persons, classe){
-  // console.log(content);
   content = content.replace(/&#xE9;/gi, 'é').replace(/&#xE1;/gi, 'á');
-  console.log(content);
   var lowContent;
   persons.forEach(function(person){
       lowContent = content.toLowerCase();
@@ -313,19 +311,18 @@ var parsePersons = function(content, persons, classe){
         if(person.url){
           span = '<a class="person '+ classe + '" '
                   +'" itemscope itemtype="http://schema.org/Person" '
-                  +'href="'+person.url+'" '
+                  +'target="_blank" href="'+person.url+'" '
                   +'>'
                   +'<span class="person-surname" itemprop="givenName">' + person.surname
                   +'</span> <span class="person-name" itemprop="familyName">' + person.name
                   +'</span></a>';
         }else{
-          span = '<a class="person '+ classe + '" '
+          span = '<span class="person '+ classe + '" '
                   +'" itemscope itemtype="http://schema.org/Person" '
-                  +'href="/membres/'+person.identifiant+'" '
                   +'>'
                   +'<span class="person-surname" itemprop="givenName">' + person.surname
                   +'</span> <span class="person-name" itemprop="familyName">' + person.name
-                  +'</span></a>';
+                  +'</span></span>';
           // console.log(span);
         }
         content = content.substr(0, index) + span + content.substr(index + person.completeName.length, content.length - 1);
@@ -347,7 +344,8 @@ var parsePersonsInDocuments = function(data, callback){
       completeName : name,
       surname : person.Surname,
       name : person.Name,
-      identifiant : person.identifiant
+      identifiant : person.identifiant,
+      url : "/membres/"+person.identifiant
     });
   });
 
@@ -486,31 +484,37 @@ var searchExpression = function(expression){
     return [];
   }
   var matches = searchExpressionIn(expression, driveData, [], []);
-
+  var jointPath;
   matches.forEach(function(match){
-    match.jointPath = match.path.join('/');
-    match.contextPath = (match.path.length > 3)?match.path.slice(0, 2).join('/'):match.path.slice(0, match.path.length - 2).join('/');
-    if(match.path.length > 3){
-      match.context = tree.select(match.path.slice(0, 2)).get();
+    jointPath = match.path.join('/');
+    match.jointPath = jointPath;
+
+    if(match.path[0] === "annuaire"){
+      match.contextPath = match.path.slice(0, 3);
+      match.matchType = "membre";
+    }else if(match.path[0] === "evenements"){
+      match.contextPath = match.path.slice(0, 3);
+      match.matchType = "evenement";
     }else{
-      match.context = tree.select(match.path.slice(0, match.path.length - 2)).get();
+      match.matchType = "page";
+      match.contextPath = match.path.slice(0, match.path.length - 1);
     }
+
+    match.context = tree.select(match.contextPath).get();
     match.score = 1;
   });
 
   //removing duplicates
-  if(matches.length > 1){
-    for(var i = (matches.length - 1) ; i >= 1 ; i--){
-      for(var j = i - 1 ; j >= 0 ; j--){
-        if(matches[i].contextPath === matches[j].contextPath){
-          console.log('removing duplicate ', matches[i].contextPath);
-          matches[j].score ++;
-          matches.splice(matches[i], 1);
-          i--;
-          j--;
-        }
+  var i = 0, j;
+  while(i < matches.length){
+    for(var j = matches.length - 1 ; j > i ; j--){
+      console.log(j);
+      if(matches[i].contextPath.join('/') === matches[j].contextPath.join('/')){
+        console.log('removing duplicate ', matches[j].contextPath.join('/'));
+        matches.splice(j, 1);
       }
     }
+    i++;
   }
 
   console.log('done with search, number of found items :', matches.length);

@@ -1,0 +1,71 @@
+<aside>
+    <img ng-src="{{membre.image_url}}" alt="membre.identifiant">
+</aside>
+
+<section class="profile-main">
+  <h2>{{membre.surname}} {{membre.name}}</h2>
+
+  <div ng-bind-html="buildAffiliation()"></div>
+
+
+  <div ng-show="membre.researchtopickeywordsseparatedbycomasfr != ''">
+    <h4>Mots-clés de recherche</h4>
+    <p>
+      {{ membre.researchtopickeywordsseparatedbycomasfr}}
+    </p>
+  </div>
+
+
+  <div ng-show = "membre.phdthesistitlefr != ''">
+    <h4>Thèse</h4>
+    <h3>
+      {{membre.phdthesistitlefr}}
+    </h3>
+
+    <!--direction-->
+    <div ng-show="membre.phdsupervisornamesurname != ''">
+      <p>
+        Direction : {{membre.phdsupervisornamesurname}}
+      </p>
+    </div>
+    <!--autres encadrants-->
+    <div ng-show="membre.phdadvisorco-encadrantnamesurnamesparatedbycomas != ''">
+      <p>
+        Autres encadrants : {{membre.phdadvisorco-encadrantnamesurnamesparatedbycomas}}
+      </p>
+    </div>
+
+    <!--dates et fin-->
+    <div ng-show="membre.startyear">
+      <p>
+        Recherche débutée en {{membre.startyear}}
+        <span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
+      </p>
+    </div>
+
+
+    <p ng-show = "membre.phddescriptionfr != ''">
+      {{membre.phddescriptionfr}}
+    </p>
+  </div>
+</section>
+<aside>
+  <div ng-show = "membre.minibio40carfr != ''">
+    <h4>À propos :</h4>
+    <p>
+      {{membre.minibio140carfr}}
+    </p>
+  </div>
+
+
+  <div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>
+  <div ng-show = "membre.e-mailpublic != ''">E-mail : {{membre.e-mailpublic}}</div>
+  <div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>
+  <div ng-show = "membre.site != ''">Site principal : <a href="{{ membre.site }}">{{ membre.site }}</a></div>
+  <div ng-show = "membre.sites">
+    <p>Autres sites :</p>
+    <p ng-repeat="site in membre.sites">
+      <a href="{{site.url}}">{{site.text}}</a>
+    </p>
+  </div>
+</aside>

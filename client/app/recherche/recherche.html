@@ -1,3 +1,52 @@
-<div class="col-md-12">
-This is the recherche view.
-</div>
+<section class="content-section" >
+  <h4>Votre recherche</h4>
+  <form ng-submit="updateLocalSearch(globalSearch)">
+    <span class="glyphicon glyphicon-search"></span>
+    <input type="text" ng-model="globalSearch">
+    <input type="submit" style="display:none">
+  </form>
+</section>
+
+
+<section id="resultats" class="content-section" ng-switch="searchStatus">
+  <div ng-switch-when="loading">
+    <div  ng-include="'components/loading-states/loading.html'"></div>
+  </div>
+  <div ng-switch-when="error">
+    <div ng-include="'components/loading-states/error.html'"></div>
+  </div>
+  <div
+    ng-switch-when="ok"
+  >
+    <h2 ng-if="searchResults.results.length > 0" ng-bind="(searchResults.results.length == 1)?('Un résultat pour '+searchResults.query.q):(searchResults.results.length + ' résultats pour ' + searchResults.query.q)">Résultats</h2>
+    <h2 ng-if="searchResults.results.length == 0">Pas de résultats pour {{searchResults.query.q}}</h2>
+    <div
+    class="result-item"
+    ng-repeat ="result in searchResults.results track by $index"
+    ng-switch="result.matchType"
+    >
+      <div ng-switch-when="membre">
+        <p class="match-type">Membre du réseau</p>
+        <div
+          ng-include="'components/membre-cartel/membre-cartel.html'"
+          ng-init="membre = result.context"
+        ></div>
+      </div>
+
+      <div ng-switch-when="evenement"
+      >
+        <p class="match-type">Évènement du réseau</p>
+        <div
+          ng-include="'components/evt-cartel/evt-cartel.html'"
+          ng-init="evenement = result.context"
+        ></div>
+      </div>
+
+      <a ng-switch-when="page"
+        ng-href="/{{result.context.slug}}">
+        <p class="match-type">Page du site</p>
+        <h4 ng-bind="result.context.title"></h4>
+      </a>
+    </div>
+  </div>
+</section>

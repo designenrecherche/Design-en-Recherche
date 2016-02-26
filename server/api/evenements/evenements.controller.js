@@ -11,12 +11,13 @@ exports.index = function(req, res) {
     var evenements = utils.renderGData('evenements', 'gContent'),
         evenement;
 
-    if(!evenements){
-      res.json({});
+    var ok = evenements && evenements.length;
+    if(!ok){
+      return res.json({});
     }
 
     evenements.some(function(evenement){
-      if(evenement.slug === req.params.id){
+      if(evenement.identifiant === req.params.id){
         if(evenement.page_visible)
           return res.json(evenement);
         else res.json({});
@@ -24,7 +25,9 @@ exports.index = function(req, res) {
     });
   }else{
     var evenements = utils.renderGData('evenements', 'gContent');
-
+    if(!evenements){
+      return res.json([]);
+    }
     evenements = evenements.filter(function(evenement){
       return evenement.index_visible == "oui";
     })

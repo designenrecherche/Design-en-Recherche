@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"  ng-app="designEnRechercheApp"   ng-controller="MasterCtrl"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -21,7 +22,7 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="designEnRechercheApp">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -71,12 +72,14 @@
       <script src="bower_components/angular-route/angular-route.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/MasterCtrl/MasterCtrl.controller.js"></script>
           <script src="app/a-propos/a-propos.controller.js"></script>
           <script src="app/a-propos/a-propos.js"></script>
           <script src="app/apiService/apiService.service.js"></script>
@@ -85,12 +88,15 @@
           <script src="app/evenements/evenements.controller.js"></script>
           <script src="app/evenements/evenements.js"></script>
           <script src="app/fitNav/fitNav.directive.js"></script>
+          <script src="app/focusMe/focusMe.directive.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/membres/membres.controller.js"></script>
           <script src="app/membres/membres.js"></script>
           <script src="app/recherche/recherche.controller.js"></script>
           <script src="app/recherche/recherche.js"></script>
+          <script src="components/evt-cartel/evt-cartel.controller.js"></script>
+          <script src="components/membre-cartel/membre-cartel.controller.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->

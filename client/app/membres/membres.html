@@ -1,3 +1,24 @@
-<div class="col-md-12">
-This is the membres view.
-</div>
+<section id="membres" class="content-section" ng-switch="loadingStatus">
+  <div ng-switch-when="loading">
+    <div  ng-include="'components/loading-states/loading.html'"></div>
+  </div>
+  <div ng-switch-when="error">
+    <div ng-include="'components/loading-states/error.html'"></div>
+  </div>
+  <div class="content" ng-switch-when="ok">
+    <div ng-if="!membreId">
+      <form class="search-membre">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text" ng-model="searchMembre">
+      </form>
+      <section class="membres">
+        <div
+            ng-include="'components/membre-cartel/membre-cartel.html'"
+            ng-repeat="membre in data | orderBy:'name' | filter:searchMembre track by $index"
+          ></div>
+      </section>
+    </div>
+    <div ng-if="membreId" ng-include="'components/membre-page/membre-page.html'" ng-init="membre = data">
+    </div>
+  </div>
+</section>

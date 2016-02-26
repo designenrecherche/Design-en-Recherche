@@ -1,3 +1,24 @@
-<div class="col-md-12">
-This is the evenements view.
-</div>
+<section id="evenements" class="content-section" ng-switch="loadingStatus">
+  <div ng-switch-when="loading">
+    <div  ng-include="'components/loading-states/loading.html'"></div>
+  </div>
+  <div ng-switch-when="error">
+    <div ng-include="'components/loading-states/error.html'"></div>
+  </div>
+  <div class="content" ng-switch-when="ok">
+    <div ng-if="!evenementId">
+      <form class="search-evneement">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text" ng-model="searchEvenement">
+      </form>
+      <section class="evenements">
+        <div
+            ng-include="'components/evt-cartel/evt-cartel.html'"
+            ng-repeat="evenement in data | filter:searchEvenement track by $index"
+          ></div>
+      </section>
+    </div>
+    <div ng-if="evenementId" ng-include="'components/evenement-page/evenement-page.html'" ng-init="evenement = data">
+    </div>
+  </div>
+</section>

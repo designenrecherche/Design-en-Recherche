@@ -1,0 +1,15 @@
+<section
+  ng-controller="EvtCartel"
+>
+  <h4>
+    <span ng-if="evenement.page_visible !== 'oui'" ng-bind="evenement.titre"></span>
+    <a ng-if="evenement.page_visible === 'oui'" ng-href="evenements/{{evenement.identifiant}}" ng-bind="evenement.titre"></a>
+  </h4>
+  <p class = "description" ng-bind="evenement.description_rapide"></p>
+  <p class="evt-cartel-place-date">
+    <span ng-bind="prettyDate(evenement.date)"></span> - <span ng-bind="(evenement.lieu.length)?evenement.lieu:'Lieu à définir'"></span>
+  </p>
+  <p class="evt-cartel-link" ng-if="evenement.page_visible === 'oui'">
+    <a ng-href="/evenements/{{evenement.identifiant}}">Plus d'informations</a>
+  </p>
+</section>

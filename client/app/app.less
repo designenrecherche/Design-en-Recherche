@@ -5,16 +5,16 @@
 @icon-font-path: '/bower_components/bootstrap/fonts/';
 @fa-font-path: '/bower_components/font-awesome/fonts';
 
-@bgColor : #F0EFE7;
+@bgColor : #f0efe7;
 @textColor : #242222;
-@mainColor : #546FE7;
-@footerBgColor : #4D4D4D;
-@footerTextColor: #7C7C7C;
+@mainColor : #546fe7;
+@footerBgColor : #4d4d4d;
+@footerTextColor: #7c7c7c;
 
-@evenementsColor : #ED475D;
-@membresColor : #46D2B0;
-@aProposColor : #B3B2AC;
-@contactColor : #F49389;
+@evenementsColor : #ed475d;
+@membresColor : #46d2b0;
+@aProposColor : #b3b2ac;
+@contactColor : #f49389;
 
 @navBorder : 2px;
 @gutter : 1em;
@@ -24,103 +24,130 @@
 RESETS
 */
 .navbar-toggle,
-.navbar-toggle:hover{
-  border : none!important;
-  border-radius : 0!important;
+.navbar-toggle:hover
+{
+    border: none!important;
+    border-radius: 0!important;
 }
 
-input:focus{
-  outline : none!important;
+input:focus
+{
+    outline: none!important;
 }
 
-a,a:hover,a:visited,a:link,a:active{
-  text-decoration : none!important;
-  color : inherit;
+a,
+a:hover,
+a:visited,
+a:link,
+a:active
+{
+    // text-decoration: none!important;
+
+    color: inherit;
 }
 
-.navbar-brand{
-  padding-left : 1em;
+.navbar-brand
+{
+    padding-left: 1em;
 }
 
 /*
 GLOBAL LAYOUT
 */
 
-body{
 
+
+.view-wrapper
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    min-height: 100%;
 }
 
-.view-wrapper{
-  position : absolute;
-  width: 100%;
-  min-height: 100%;
-  left : 0;
-  top : 0;
+.view-container
+{
+    padding-top: 1em;
+    padding-bottom: 10em;
 }
 
-.view-container{
-  padding-top : 1em;
-  padding-bottom : 10em;
+.navbar
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
 }
 
-.navbar{
-  position : fixed;
-  top : 0;
-  left : 0;
-  width : 100%;
-}
-
-.navbar .navbar-nav{
-  float : right;
+.navbar .navbar-nav
+{
+    float: right;
 }
 
 
 
-footer{
-  position : absolute;
-  bottom : 0;
-  left : 0;
-  width : 100%;
-  display : flex;
-  flex-direction : row wrap;
-  padding : @gutter;
+footer
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: row wrap;
+
+    width: 100%;
+    padding: @gutter;
 }
 
-.content-section{
-  margin-bottom : 1em;
+.content-section
+{
+    margin-bottom: 1em;
 }
 
 /*
 LAYOUT STYLING
 */
 
-body{
-  background : @bgColor;
-  color : @textColor;
-  font-family: 'Signika', sans-serif;
+body
+{
+    font-family: 'Signika', sans-serif;
+
+    color: @textColor;
+    background: @bgColor;
 }
 
-footer{
-  background : @footerBgColor;
-  color : @footerTextColor;
+footer
+{
+    color: @footerTextColor;
+    background: @footerBgColor;
 }
 
 /*
 GENERIC COMPONENTS
 */
 
+iframe{
+    width : 100%;
+}
+
 .navbar-toggle:hover,
 .navbar-toggle:active
 {
-  background : inherit!important;
+    background: inherit!important;
 }
 
-.navbar-toggle:hover .icon-bar{
-  background : white!important;
+.navbar-toggle:hover .icon-bar
+{
+    background: white!important;
 }
 
-.person{
-  font-weight : 800;
+.person,
+.view-container a
+{
+    font-weight: 800;
 }
 
 /*
@@ -128,58 +155,137 @@ SPECIFIC COMPONENTS STYLING
 */
 
 
-.view-wrapper#main .navbar-wrapper{
-  background : @mainColor;
+.view-wrapper#main .navbar-wrapper
+{
+    background: @mainColor;
 }
 
-.view-wrapper#evenements .navbar-wrapper{
-  background : @evenementsColor;
+.view-wrapper#evenements .navbar-wrapper
+{
+    background: @evenementsColor;
 }
 
-.view-wrapper#membres .navbar-wrapper{
-  background : @membresColor;
+.view-wrapper#membres .navbar-wrapper
+{
+    background: @membresColor;
 }
 
-.view-wrapper#contact .navbar-wrapper{
-  background : @contactColor;
+.view-wrapper#contact .navbar-wrapper
+{
+    background: @contactColor;
 }
 
-.view-wrapper#a-propos .navbar-wrapper{
-  background : @aProposColor;
+.view-wrapper#a-propos .navbar-wrapper
+{
+    background: @aProposColor;
 }
 
-.view-wrapper#recherche .navbar-wrapper{
-  background : @mainColor;
+.view-wrapper#recherche .navbar-wrapper
+{
+    background: @mainColor;
 }
 
 
-.navbar, .navbar a{
-  background : inherit!important;
-  color: white!important;
+.navbar,
+.navbar a
+{
+    color: white!important;
+    background: inherit!important;
 }
 
-.navbar .navbar-nav > .active > a{
-  background : inherit!important;
-  color : @textColor!important;
+.navbar .navbar-nav > .active > a
+{
+    color: @textColor!important;
+    background: inherit!important;
 }
 
-.navbar a#main:hover{
-  border-bottom : @navBorder solid @mainColor;
+.navbar a#main:hover
+{
+    border-bottom: @navBorder solid @mainColor;
 }
-.navbar a#membres:hover{
-  border-bottom : @navBorder solid @membresColor;
+.navbar a#membres:hover
+{
+    border-bottom: @navBorder solid @membresColor;
 }
-.navbar a#evenements:hover{
-  border-bottom : @navBorder solid @evenementsColor;
+.navbar a#evenements:hover
+{
+    border-bottom: @navBorder solid @evenementsColor;
 }
-.navbar a#contact:hover{
-  border-bottom : @navBorder solid @contactColor;
+.navbar a#contact:hover
+{
+    border-bottom: @navBorder solid @contactColor;
 }
-.navbar a#a-propos:hover{
-  border-bottom : @navBorder solid @aProposColor;
+.navbar a#a-propos:hover
+{
+    border-bottom: @navBorder solid @aProposColor;
 }
-.navbar a#recherche:hover{
-  border-bottom : @navBorder solid @mainColor;
+.navbar #recherche:hover
+{
+    border-bottom: @navBorder solid @mainColor;
+    cursor : pointer;
+}
+
+#main .view-container a
+{
+    color : @mainColor;
+}
+#membres .view-container a
+{
+    color : @membresColor;
+}
+#evenements .view-container a
+{
+    color : @evenementsColor;
+}
+#contact .view-container a
+{
+    color : @contactColor;
+}
+#a-propos .view-container a
+{
+    color : @aProposColor;
+}
+#recherche .view-container a
+{
+    color : @mainColor;
+    cursor : pointer;
+}
+
+.view-container a.person{
+    color : @textColor;
+}
+
+#recherche .inline-form
+{
+    display: inline;
+    float: left;
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#recherche .search-mode .angucomplete-holder{
+    display : inline;
+}
+
+#recherche angucomplete-alt{
+    display : none;
+}
+
+#recherche .search-mode angucomplete-alt{
+    display : inline;
+}
+
+.angucomplete-dropdown{
+    margin-top : 2em;
+    max-height : 500px;
+    overflow-y : auto;
+}
+
+#recherche input{
+  color : @textColor;
+  padding : 0;
+  border : none;
 }
 
 // injector

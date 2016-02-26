@@ -5,7 +5,8 @@ angular.module('designEnRechercheApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angucomplete-alt'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
