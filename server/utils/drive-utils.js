@@ -48,7 +48,7 @@ var cleanHTMLContent = function(raw){
 
   var $ = cheerio.load(raw);
   var contents = $('body #contents');
-  contents.find('*').removeClass();
+  contents.find('*').removeAttr('class');
   contents.find('style').remove();
   contents.find('script').remove();
   contents.find('a').attr('target', '_blank')
@@ -256,13 +256,13 @@ var fetchProfileImage = function(person, callback){
     png: '89504e47',
     gif: '47494638'
   };
-  console.log('going to verify ', personImgUrl);
+  // console.log('going to verify ', personImgUrl);
   request({
     encoding : null,
     url : personImgUrl
   }, function(err, response, body){
     if(err){
-      console.log('fetching image', personImgUrl, ' failed!');
+      // console.log('fetching image', personImgUrl, ' failed!');
       person.image_url = gAssetsRoutes.images_annuaire + 'default.png';
       callback(err, person);
     }
@@ -273,7 +273,7 @@ var fetchProfileImage = function(person, callback){
         var contents = cleanHTMLContent(body);
         callback(null, person);
       }else{
-        console.log('fetching image', personImgUrl, ' failed!');
+        // console.log('fetching image', personImgUrl, ' failed!');
         person.image_url = gAssetsRoutes.images_annuaire + 'default.png';
         callback(err, person);
       }
@@ -299,32 +299,37 @@ var fetchProfileImages = function(data, callback){
   });
 }
 
+
 var parsePersons = function(content, persons, classe){
-  var lowContent = content.toLowerCase();
+  // console.log(content);
+  content = content.replace(/&#xE9;/gi, 'é').replace(/&#xE1;/gi, 'á');
+  console.log(content);
+  var lowContent;
   persons.forEach(function(person){
-    if(lowContent.indexOf(person.completeName.toLowerCase()) > -1){
-      index = lowContent.indexOf(person.completeName.toLowerCase());
-      if(classe === 'invite')
-        console.log('match : ', person);
-      if(person.url){
-        span = '<a class="person '+ classe + '" person="'
-                +person.completeName
-                +'" itemscope itemtype="http://schema.org/Person" '
-                +'href="'+person.url+'" '
-                +'>'
-                +'<span class="person-surname" itemprop="givenName">' + person.surname
-                +'</span> <span class="person-name" itemprop="familyName">' + person.name
-                +'</span></a>';
-        console.log(span);
-      }else{
-        span = '<span class="person '+ classe + '" person="'
-                +person.completeName
-                +'" itemscope itemtype="http://schema.org/Person">'
-                +'<span class="person-surname" itemprop="givenName">' + person.surname
-                +'</span> <span class="person-name" itemprop="familyName">' + person.name
-                +'</span></span>';
-      }
-      content = content.substr(0, index) + span + content.substr(index + person.completeName.length, content.length - 1);
+      lowContent = content.toLowerCase();
+      var hasPerson = lowContent.indexOf(person.completeName.toLowerCase()) > -1 && lowContent.charAt(lowContent.indexOf(person.completeName.toLowerCase()) -1) != '>';
+      while(lowContent.indexOf(person.completeName.toLowerCase()) > -1){
+        index = lowContent.indexOf(person.completeName.toLowerCase());
+        if(person.url){
+          span = '<a class="person '+ classe + '" '
+                  +'" itemscope itemtype="http://schema.org/Person" '
+                  +'href="'+person.url+'" '
+                  +'>'
+                  +'<span class="person-surname" itemprop="givenName">' + person.surname
+                  +'</span> <span class="person-name" itemprop="familyName">' + person.name
+                  +'</span></a>';
+        }else{
+          span = '<a class="person '+ classe + '" '
+                  +'" itemscope itemtype="http://schema.org/Person" '
+                  +'href="/membres/'+person.identifiant+'" '
+                  +'>'
+                  +'<span class="person-surname" itemprop="givenName">' + person.surname
+                  +'</span> <span class="person-name" itemprop="familyName">' + person.name
+                  +'</span></a>';
+          // console.log(span);
+        }
+        content = content.substr(0, index) + span + content.substr(index + person.completeName.length, content.length - 1);
+        lowContent = content.toLowerCase();
     }
   });
   // console.log(content);
@@ -341,7 +346,8 @@ var parsePersonsInDocuments = function(data, callback){
     members.push({
       completeName : name,
       surname : person.Surname,
-      name : person.Name
+      name : person.Name,
+      identifiant : person.identifiant
     });
   });
 
@@ -398,9 +404,8 @@ var dateAndNext = function(data, callback){
 
     if(nextEvts){
       data.nextEvts = nextEvts;
-      console.log('next events', nextEvts);
     }
-
+    console.log('date events calling back');
     return callback(undefined, data);
   }
 }
@@ -508,7 +513,7 @@ var searchExpression = function(expression){
     }
   }
 
-
+  console.log('done with search, number of found items :', matches.length);
   return matches;
 }
 

@@ -12,5 +12,6 @@ exports.index = function(req, res) {
   if(q){
     results = utils.searchExpression(decodeURIComponent(q));
   }
+
   res.json({query:query,results:results});
 };

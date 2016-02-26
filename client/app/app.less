@@ -1,15 +1,193 @@
 @import 'bootstrap/less/bootstrap.less';
 @import 'font-awesome/less/font-awesome.less';
+@import url(https://fonts.googleapis.com/css?family=Signika:400,600,700,300);
 
 @icon-font-path: '/bower_components/bootstrap/fonts/';
 @fa-font-path: '/bower_components/font-awesome/fonts';
 
-/**
- * App-wide Styles
- */
+@bgColor : #F0EFE7;
+@textColor : #242222;
+@mainColor : #546FE7;
+@footerBgColor : #4D4D4D;
+@footerTextColor: #7C7C7C;
 
+@evenementsColor : #ED475D;
+@membresColor : #46D2B0;
+@aProposColor : #B3B2AC;
+@contactColor : #F49389;
+
+@navBorder : 2px;
+@gutter : 1em;
+
+
+/*
+RESETS
+*/
+.navbar-toggle,
+.navbar-toggle:hover{
+  border : none!important;
+  border-radius : 0!important;
+}
+
+input:focus{
+  outline : none!important;
+}
+
+a,a:hover,a:visited,a:link,a:active{
+  text-decoration : none!important;
+  color : inherit;
+}
+
+.navbar-brand{
+  padding-left : 1em;
+}
+
+/*
+GLOBAL LAYOUT
+*/
+
+body{
+
+}
+
+.view-wrapper{
+  position : absolute;
+  width: 100%;
+  min-height: 100%;
+  left : 0;
+  top : 0;
+}
+
+.view-container{
+  padding-top : 1em;
+  padding-bottom : 10em;
+}
+
+.navbar{
+  position : fixed;
+  top : 0;
+  left : 0;
+  width : 100%;
+}
+
+.navbar .navbar-nav{
+  float : right;
+}
+
+
+
+footer{
+  position : absolute;
+  bottom : 0;
+  left : 0;
+  width : 100%;
+  display : flex;
+  flex-direction : row wrap;
+  padding : @gutter;
+}
+
+.content-section{
+  margin-bottom : 1em;
+}
+
+/*
+LAYOUT STYLING
+*/
+
+body{
+  background : @bgColor;
+  color : @textColor;
+  font-family: 'Signika', sans-serif;
+}
+
+footer{
+  background : @footerBgColor;
+  color : @footerTextColor;
+}
+
+/*
+GENERIC COMPONENTS
+*/
+
+.navbar-toggle:hover,
+.navbar-toggle:active
+{
+  background : inherit!important;
+}
+
+.navbar-toggle:hover .icon-bar{
+  background : white!important;
+}
+
+.person{
+  font-weight : 800;
+}
+
+/*
+SPECIFIC COMPONENTS STYLING
+*/
+
+
+.view-wrapper#main .navbar-wrapper{
+  background : @mainColor;
+}
+
+.view-wrapper#evenements .navbar-wrapper{
+  background : @evenementsColor;
+}
+
+.view-wrapper#membres .navbar-wrapper{
+  background : @membresColor;
+}
+
+.view-wrapper#contact .navbar-wrapper{
+  background : @contactColor;
+}
+
+.view-wrapper#a-propos .navbar-wrapper{
+  background : @aProposColor;
+}
+
+.view-wrapper#recherche .navbar-wrapper{
+  background : @mainColor;
+}
+
+
+.navbar, .navbar a{
+  background : inherit!important;
+  color: white!important;
+}
+
+.navbar .navbar-nav > .active > a{
+  background : inherit!important;
+  color : @textColor!important;
+}
+
+.navbar a#main:hover{
+  border-bottom : @navBorder solid @mainColor;
+}
+.navbar a#membres:hover{
+  border-bottom : @navBorder solid @membresColor;
+}
+.navbar a#evenements:hover{
+  border-bottom : @navBorder solid @evenementsColor;
+}
+.navbar a#contact:hover{
+  border-bottom : @navBorder solid @contactColor;
+}
+.navbar a#a-propos:hover{
+  border-bottom : @navBorder solid @aProposColor;
+}
+.navbar a#recherche:hover{
+  border-bottom : @navBorder solid @mainColor;
+}
 
 // injector
+@import 'a-propos/a-propos.less';
+@import 'contact/contact.less';
+@import 'evenements/evenements.less';
 @import 'main/main.less';
+@import 'membres/membres.less';
+@import 'recherche/recherche.less';
 @import 'modal/modal.less';
 // endinjector

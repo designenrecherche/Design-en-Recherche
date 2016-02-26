@@ -26,8 +26,25 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div ng-view=""></div>
+    <div class="view-wrapper" id="{{routeId}}">
+        <div ng-include="'components/navbar/navbar.html'" class="navbar-wrapper"></div>
+        <div class="view-container container fit-nav" ng-view=""></div>
+
+        <footer>
+          <div class="container">
+            <div class="footer-column">
+              Design en recherche
+            </div>
+            <div class="footer-column">
+              <ul>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Hypotheses</a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -60,9 +77,20 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/a-propos/a-propos.controller.js"></script>
+          <script src="app/a-propos/a-propos.js"></script>
           <script src="app/apiService/apiService.service.js"></script>
+          <script src="app/contact/contact.controller.js"></script>
+          <script src="app/contact/contact.js"></script>
+          <script src="app/evenements/evenements.controller.js"></script>
+          <script src="app/evenements/evenements.js"></script>
+          <script src="app/fitNav/fitNav.directive.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/membres/membres.controller.js"></script>
+          <script src="app/membres/membres.js"></script>
+          <script src="app/recherche/recherche.controller.js"></script>
+          <script src="app/recherche/recherche.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->

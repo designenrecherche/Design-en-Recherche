@@ -2,14 +2,16 @@
 
 angular.module('designEnRechercheApp')
   .factory('apiService', function ($http) {
-    var baseUrl = '/api/',
-        evenements = 'evenements/',
-        membres = 'membres/',
-        aPropos = 'a-propos/',
-        contact = 'contact/',
+    var baseUrl       = '/api/',
+        evenements    = 'evenements/',
+        membres       = 'membres/',
+        aPropos       = 'a-propos/',
+        contact       = 'contact/',
         prochainsEvts = 'prochains-evenements/',
-        search = 'search'
-        factory = {};
+        search        = 'search',
+        introduction  = 'introduction',
+        reseaux       = 'reseaux',
+        factory       = {};
 
     factory.getEvenements = function(id, callback){
       id = (id)?id:'';
@@ -49,6 +51,28 @@ angular.module('designEnRechercheApp')
     factory.getContact = function(callback){
       $http
         .get(baseUrl + contact)
+        .success(function(d){
+          callback(undefined, d);
+        })
+        .error(function(e){
+          callback(e, undefined);
+        })
+    };
+
+    factory.getIntroduction = function(callback){
+      $http
+        .get(baseUrl + introduction)
+        .success(function(d){
+          callback(undefined, d);
+        })
+        .error(function(e){
+          callback(e, undefined);
+        })
+    };
+
+    factory.getReseaux = function(callback){
+      $http
+        .get(baseUrl + reseaux)
         .success(function(d){
           callback(undefined, d);
         })

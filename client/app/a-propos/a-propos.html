@@ -1,0 +1,10 @@
+<section id="a-propos" class="content-section" ng-switch="aProposStatus">
+  <div ng-switch-when="loading">
+    <div  ng-include="'components/loading-states/loading.html'"></div>
+  </div>
+  <div ng-switch-when="error">
+    <div ng-include="'components/loading-states/error.html'"></div>
+  </div>
+  <div class="content" ng-switch-when="ok" ng-bind-html="aPropos">
+  </div>
+</section>

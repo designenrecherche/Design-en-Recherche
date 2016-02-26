@@ -1,0 +1,29 @@
+<section id="reseaux" class="content-section" ng-switch="reseauxStatus">
+  <div ng-switch-when="loading">
+    <div  ng-include="'components/loading-states/loading.html'"></div>
+  </div>
+  <div ng-switch-when="error">
+    <div ng-include="'components/loading-states/error.html'"></div>
+  </div>
+  <div class="content" ng-switch-when="ok">
+    <h3>Le réseau sur le web</h3>
+    <p>Les activités du réseaux sont visible sur différents lieux sur le web : </p>
+    <ul class="reseaux-list">
+      <li ng-repeat="reseau in reseaux track by $index"><a ng-href="{{reseau.url_reseau}}" ng-bind="reseau.nom_reseau" target="_blank"></a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" class="content-section" ng-switch="contactStatus">
+  <div ng-switch-when="loading">
+    <div  ng-include="'components/loading-states/loading.html'"></div>
+  </div>
+  <div ng-switch-when="error">
+    <div ng-include="'components/loading-states/error.html'"></div>
+  </div>
+  <div class="content" ng-switch-when="ok">
+    <h3>Rejoindre le réseau</h3>
+    <p ng-bind-html="contact"></p>
+    <p><a href="mailto:designenrecherche@gmail.com">designenrecherche@gmail.com</a></p>
+  </div>
+</section>
