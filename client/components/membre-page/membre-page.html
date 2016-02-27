@@ -14,7 +14,7 @@
         <span itemprop="familyName" ng-bind="membre.name"></span>
       </h2>
 
-      <h3 ng-bind="(membre['defense year (if finished)'].length)?'Docteur depuis '+membre['defense year (if finished)']:'Doctorant.e'"></h3>
+      <h3 ng-bind="(membre['defenseyeariffinished'].length)?'Docteur depuis '+membre['defenseyeariffinished']:'Doctorant.e'"></h3>
       <div ng-bind-html="buildAffiliation()"></div>
 
 
