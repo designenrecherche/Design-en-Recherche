@@ -508,9 +508,8 @@ var searchExpression = function(expression){
   var i = 0, j;
   while(i < matches.length){
     for(var j = matches.length - 1 ; j > i ; j--){
-      console.log(j);
       if(matches[i].contextPath.join('/') === matches[j].contextPath.join('/')){
-        console.log('removing duplicate ', matches[j].contextPath.join('/'));
+        // console.log('removing duplicate ', matches[j].contextPath.join('/'));
         matches.splice(j, 1);
       }
     }

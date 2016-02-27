@@ -1,71 +1,84 @@
-<aside>
-    <img ng-src="{{membre.image_url}}" alt="membre.identifiant">
-</aside>
+<div
+  class="membre-page"
+  ng-controller="MembreController"
+  itemscope itemtype="http://schema.org/Person"
+>
+  <section class="top-cartel row flexed">
+    <section class="image-container">
+        <img ng-src="{{membre.image_url}}" alt="membre.identifiant">
+    </section>
 
-<section class="profile-main">
-  <h2>{{membre.surname}} {{membre.name}}</h2>
+    <section class="profile-main">
+      <h2>
+        <span itemprop="givenName" ng-bind="membre.surname"></span>
+        <span itemprop="familyName" ng-bind="membre.name"></span>
+      </h2>
 
-  <div ng-bind-html="buildAffiliation()"></div>
-
-
-  <div ng-show="membre.researchtopickeywordsseparatedbycomasfr != ''">
-    <h4>Mots-clés de recherche</h4>
-    <p>
-      {{ membre.researchtopickeywordsseparatedbycomasfr}}
-    </p>
-  </div>
+      <h3 ng-bind="(membre['defense year (if finished)'].length)?'Docteur depuis '+membre['defense year (if finished)']:'Doctorant.e'"></h3>
+      <div ng-bind-html="buildAffiliation()"></div>
 
 
-  <div ng-show = "membre.phdthesistitlefr != ''">
-    <h4>Thèse</h4>
-    <h3>
-      {{membre.phdthesistitlefr}}
-    </h3>
+      <div ng-show="membre.researchtopickeywordsseparatedbycomasfr != ''">
+        <h4>Mots-clés de recherche</h4>
+        <p>
+          {{ membre.researchtopickeywordsseparatedbycomasfr}}
+        </p>
+      </div>
+    </section>
+  </section>
 
-    <!--direction-->
-    <div ng-show="membre.phdsupervisornamesurname != ''">
-      <p>
-        Direction : {{membre.phdsupervisornamesurname}}
-      </p>
+  <section class="row flexed">
+    <section class="profile-bio">
+          <h2>À propos</h2>
+          <p ng-bind="(membre.minibio140carfr.length)?membre.minibio140carfr:membre.minibio140caren">
+          </p>
+
+        <div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>
+    </section>
+
+    <section class="profile-contacts">
+      <h2>Contacts</h2>
+      <div ng-show = "membre.emailpublic != ''">E-mail : {{membre.emailpublic}}</div>
+      <div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>
+      <div ng-show = "membre.site != ''">Site web personnel : <a target="_blank" href="{{ membre.site }}">{{ membre.site }}</a></div>
+      <div ng-show = "membre.sites">
+        <p>Autres sites :
+          <a  ng-repeat="site in membre.sites" target="_blank" href="{{site.url}}">{{site.text}} </a>
+        </p>
+      </div>
+    </section>
+  </section>
+
+
+  <section class="profile-these row">
+    <div>
+      <h2>Thèse</h2>
+      <blockquote class="titre-these" ng-bind="(membre.phdthesistitlefr.length)?membre.phdthesistitlefr:membre.phdthesistitleen">
+      </blockquote>
+
+      <!--direction-->
+      <div ng-show="membre.phdsupervisornamesurname != ''">
+        <p>
+          Direction : {{membre.phdsupervisornamesurname}}
+        </p>
+      </div>
+      <!--autres encadrants-->
+      <div ng-show="membre.phdadvisorcoencadrantnamesurnamesparatedbycomas != ''">
+        <p>
+          Autres encadrants : {{membre.phdadvisorcoencadrantnamesurnamesparatedbycomas}}
+        </p>
+      </div>
+
+      <!--dates et fin-->
+      <div ng-show="membre.startyear">
+        <p>
+          Recherche doctorale débutée en {{membre.startyear}}<span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
+        </p>
+      </div>
+
+      <h4>Résumé de la thèse :</h4>
+      <blockquote class="description-these" ng-bind="(membre.phddescriptionfr.length)?membre.phddescriptionfr:membre.phddescriptionen">
+      </blockquote>
     </div>
-    <!--autres encadrants-->
-    <div ng-show="membre.phdadvisorco-encadrantnamesurnamesparatedbycomas != ''">
-      <p>
-        Autres encadrants : {{membre.phdadvisorco-encadrantnamesurnamesparatedbycomas}}
-      </p>
-    </div>
-
-    <!--dates et fin-->
-    <div ng-show="membre.startyear">
-      <p>
-        Recherche débutée en {{membre.startyear}}
-        <span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
-      </p>
-    </div>
-
-
-    <p ng-show = "membre.phddescriptionfr != ''">
-      {{membre.phddescriptionfr}}
-    </p>
-  </div>
-</section>
-<aside>
-  <div ng-show = "membre.minibio40carfr != ''">
-    <h4>À propos :</h4>
-    <p>
-      {{membre.minibio140carfr}}
-    </p>
-  </div>
-
-
-  <div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>
-  <div ng-show = "membre.e-mailpublic != ''">E-mail : {{membre.e-mailpublic}}</div>
-  <div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>
-  <div ng-show = "membre.site != ''">Site principal : <a href="{{ membre.site }}">{{ membre.site }}</a></div>
-  <div ng-show = "membre.sites">
-    <p>Autres sites :</p>
-    <p ng-repeat="site in membre.sites">
-      <a href="{{site.url}}">{{site.text}}</a>
-    </p>
-  </div>
-</aside>
+  </section>
+</div>

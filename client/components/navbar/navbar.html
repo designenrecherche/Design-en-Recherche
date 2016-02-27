@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<div class="navbar navbar-default navbar-static-top animate" ng-controller="NavbarCtrl"   ng-class="{'scroll-at-top': scrollAtTop}">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
@@ -7,7 +7,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">Design en Recherche</a>
+      <!-- <a href="/" class="navbar-brand">Design en Recherche</a> -->
+      <div class="animate" id="designLogo" der-logo="$parent.$parent.membres">
+      <a id="brand-text" class="animate" href="/" ng-bind-html="brandPlaceHolder">Design<br>En recherche</a>
+
+      </div>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">

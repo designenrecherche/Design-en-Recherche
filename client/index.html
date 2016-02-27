@@ -33,14 +33,15 @@
 
         <footer>
           <div class="container">
-            <div class="footer-column">
-              Design en recherche
+            <div class="footer-column" style="flex-grow : 5">
+              <h3>Design en recherche</h3>
+              <h4>Le réseau des jeunes chercheurs en design</h4>
+              <p>Association loi 1901 à but non-lucratif.</p>
             </div>
             <div class="footer-column">
-              <ul>
-                <li><a href="">Facebook</a></li>
-                <li><a href="">Twitter</a></li>
-                <li><a href="">Hypotheses</a></li>
+              <p>Nous suivre sur le net :</p>
+              <ul class="reseaux-liste">
+                <li ng-repeat="reseau in reseaux track by $index"><a ng-href="{{reseau.url_reseau}}" target="_blank" ng-bind="reseau.nom_reseau"></a></li>
               </ul>
             </div>
           </div>
@@ -54,7 +55,7 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-55178362-1');
       ga('send', 'pageview');
     </script>
 
@@ -73,6 +74,8 @@
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
+      <script src="bower_components/angularytics/dist/angularytics.min.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -85,6 +88,7 @@
           <script src="app/apiService/apiService.service.js"></script>
           <script src="app/contact/contact.controller.js"></script>
           <script src="app/contact/contact.js"></script>
+          <script src="app/derLogo/derLogo.directive.js"></script>
           <script src="app/evenements/evenements.controller.js"></script>
           <script src="app/evenements/evenements.js"></script>
           <script src="app/fitNav/fitNav.directive.js"></script>
@@ -95,8 +99,10 @@
           <script src="app/membres/membres.js"></script>
           <script src="app/recherche/recherche.controller.js"></script>
           <script src="app/recherche/recherche.js"></script>
+          <script src="app/twitterTimeline/twitterTimeline.directive.js"></script>
           <script src="components/evt-cartel/evt-cartel.controller.js"></script>
           <script src="components/membre-cartel/membre-cartel.controller.js"></script>
+          <script src="components/membre-page/membre-page.controller.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->

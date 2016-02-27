@@ -8,6 +8,9 @@ angular.module('designEnRechercheApp')
       if($scope.membreId){
         $scope.searchMembre = '';
         updateMembre($scope.membreId);
+      }else if($scope.$parent.membres.length){
+        $scope.data = $scope.$parent.membres;
+        $scope.loadingStatus = 'ok';
       }else{
         updateMembres();
       }

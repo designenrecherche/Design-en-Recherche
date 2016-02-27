@@ -1,7 +1,30 @@
-<section
+<a
   ng-controller="MembreCartel"
+  class="membre-cartel animate membre"
+  ng-href="/membres/{{membre.identifiant}}"
+  itemscope itemtype="http://schema.org/Person"
 >
-  <h4>
-    <a ng-href="membres/{{membre.identifiant}}" ng-bind="membre.surname + ' ' +membre.name"></a>
-  </h4>
-</section>
+  <div class="cartel-column img-container">
+    <img ng-src="{{membre.image_url}}" alt="">
+  </div>
+  <div class="cartel-column">
+    <h4>
+      <span itemprop="givenName" ng-bind="membre.surname"></span>
+      <span itemprop="familyName" ng-bind="membre.name"></span>
+    </h4>
+    <h5 ng-bind="(membre['defense year (if finished)'].length)?'docteur':'doctorant.e'"></h5>
+    <p ng-if="membre['phd thesis title fr'].length">
+      Thèse : "{{membre['phd thesis title fr']}}"
+    </p>
+    <p  itemprop="affiliation" ng-if="membre['etablissement 1'].length">
+      {{membre['etablissement 1']}}
+    </p>
+    <p itemprop="affiliation" ng-if="membre['etablissement 2'].length">
+      {{membre['etablissement 2']}}
+    </p>
+    <p itemprop="affiliation"ng-if="membre['etablissement 3'].length">
+      {{membre['etablissement 3']}}
+    </p>
+    </h4>
+  </div>
+</a>

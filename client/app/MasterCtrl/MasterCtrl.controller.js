@@ -7,6 +7,23 @@ angular.module('designEnRechercheApp')
       setTimeout(function(){
         $scope.$apply();
       });
+      apiService.getMembres(undefined, function(err, data){
+        if(data){
+          $scope.membres = data;
+          setTimeout(function(){
+            $scope.$apply();
+          });
+        }
+      });
+
+      apiService.getReseaux(function(err, data){
+        if(data){
+          $scope.reseaux = data;
+          setTimeout(function(){
+            $scope.$apply();
+          });
+        }
+      });
     }
 
     var updateSearch = function(query){

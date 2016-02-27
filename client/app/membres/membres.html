@@ -7,9 +7,10 @@
   </div>
   <div class="content" ng-switch-when="ok">
     <div ng-if="!membreId">
+      <h1>Les chercheurs du réseau</h1>
       <form class="search-membre">
         <span class="glyphicon glyphicon-search"></span>
-        <input type="text" ng-model="searchMembre">
+        <input placeholder="chercher dans les membres" type="text" ng-model="searchMembre">
       </form>
       <section class="membres">
         <div

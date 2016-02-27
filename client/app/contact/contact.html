@@ -6,9 +6,9 @@
     <div ng-include="'components/loading-states/error.html'"></div>
   </div>
   <div class="content" ng-switch-when="ok">
-    <h3>Le réseau sur le web</h3>
+    <h1>Le réseau sur le web</h1>
     <p>Les activités du réseaux sont visible sur différents lieux sur le web : </p>
-    <ul class="reseaux-list">
+    <ul class="reseaux-liste">
       <li ng-repeat="reseau in reseaux track by $index"><a ng-href="{{reseau.url_reseau}}" ng-bind="reseau.nom_reseau" target="_blank"></a></li>
     </ul>
   </div>
@@ -22,7 +22,7 @@
     <div ng-include="'components/loading-states/error.html'"></div>
   </div>
   <div class="content" ng-switch-when="ok">
-    <h3>Rejoindre le réseau</h3>
+    <h1>Rejoindre le réseau</h1>
     <p ng-bind-html="contact"></p>
     <p><a href="mailto:designenrecherche@gmail.com">designenrecherche@gmail.com</a></p>
   </div>

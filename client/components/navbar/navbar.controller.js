@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('designEnRechercheApp')
-  .controller('NavbarCtrl', function ($scope, $location, $timeout) {
+  .controller('NavbarCtrl', function ($scope, $location, $timeout, $window) {
     $scope.menu = [
     {
       'title': 'Accueil',
@@ -33,6 +33,8 @@ angular.module('designEnRechercheApp')
       'id' : 'recherche'
     }*/
     ];
+
+    $scope.brandPlaceHolder = "Design<br>En <br>recherche";
 
 
     $scope.isCollapsed = true;
@@ -94,5 +96,28 @@ angular.module('designEnRechercheApp')
           searchInput.focus();
         });
       }
+    });
+
+
+    $scope.scrollAtTop = true;
+
+    var evalScroll = function(){
+      var top = windowEl.scrollTop();
+      if(top < 100){
+        $scope.scrollAtTop = true;
+      }else{
+        $scope.scrollAtTop = false;
+      }
+      setTimeout(function(){
+        $scope.$apply();
+      })
+    }
+
+    //I know, I should do that in a directive ...
+    var windowEl = angular.element($window);
+    windowEl.on('scroll', evalScroll);
+
+    $scope.$on('$destroy', function(){
+      windowEl.off('scroll', evalScroll);
     })
   });
