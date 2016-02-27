@@ -26,6 +26,10 @@ angular.module('designEnRechercheApp')
       $location.search('q', query);
     }
 
+    $scope.$parent.$watch('searchResults', function(results){
+      $scope.searchResults = results;
+    });
+
     $scope.$watch(function(){
       return $location.search().q;
     }, updateSearchResults);
