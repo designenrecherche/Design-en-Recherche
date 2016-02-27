@@ -508,9 +508,14 @@ var searchExpression = function(expression){
   var i = 0, j;
   while(i < matches.length){
     for(var j = matches.length - 1 ; j > i ; j--){
-      if(matches[i].contextPath.join('/') === matches[j].contextPath.join('/')){
-        // console.log('removing duplicate ', matches[j].contextPath.join('/'));
+      if(matches[j].contextPath[0] === 'nextEvts'){
         matches.splice(j, 1);
+      }else if(matches[i].contextPath.join('/') === matches[j].contextPath.join('/')){
+        // console.log('removing duplicate ', matches[j].contextPath.join('/'));
+        matches[j].contextPath.join('/')
+        matches.splice(j, 1);
+      }else{
+        console.log(matches[j].contextPath.join('/'));
       }
     }
     i++;

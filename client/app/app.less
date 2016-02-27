@@ -21,7 +21,7 @@
 @navBorder : 2px;
 @gutter : 1em;
 
-@transition : 500;
+@transition : 500ms;
 
 
 /*
@@ -63,7 +63,7 @@ GLOBAL LAYOUT
     left: 0;
 
     width: 100%;
-    min-height: 100%;
+    min-height: 120%;
 }
 
 .view-container
@@ -114,6 +114,7 @@ footer
 
     width: 100%;
     padding: @gutter;
+    height : 15%;
 }
 
 footer > .container{
@@ -139,22 +140,24 @@ footer > .container{
 {
     width: 100%;
     height: 100%;
+    overflow : visible;
 }
 
 .scroll-at-top #designLogo
 {
+    margin-top : .5em;
     width: 10em;
-    height: 5em;
+    height: 6em;
 }
 
 .navbar #brand-text
 {
-    font-size: .9em;
-    line-height: 1em;
+    font-size: .7em;
+    line-height: 1.2em;
 
     position: absolute;
-    top: .5em;
-    left: 6em;
+    top: .2em;
+    left: 7em;
 
     display: block;
 
@@ -166,8 +169,8 @@ footer > .container{
     font-size: 1em;
     line-height : 1.2em;
 
-    top: .7em;
-    left: 9em;
+    top: .5em;
+    left: 8em;
 }
 
 @media (max-width: 768px){
@@ -447,6 +450,7 @@ SPECIFIC COMPONENTS STYLING
 
     padding-top: 1.2em;
     padding-bottom: 15px;
+    padding-left : 1em;
 }
 
 #recherche .search-mode .angucomplete-holder
