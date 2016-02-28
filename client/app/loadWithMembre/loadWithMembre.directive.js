@@ -11,6 +11,9 @@ angular.module('designEnRechercheApp')
         scope.hasMembre = false;
 
         var update = function(membres){
+          if(!membres){
+            return;
+          }
           membres.some(function(m){
             if(m.identifiant === scope.membreId){
               return scope.membre = m;
@@ -25,6 +28,7 @@ angular.module('designEnRechercheApp')
           }, 500);
         }
 
+        update(scope.membres);
         scope.$watch('membres', update);
       }
     };
