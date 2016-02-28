@@ -29,7 +29,7 @@ function vimeoID(url) {
   }
 }
 
-var replaceResource = function(type, value){
+var replaceResource = function(type, value, text){
   if(type === 'ressource'){
     var extension = value.split('.').pop();
     if(extension === 'pdf'){
@@ -37,9 +37,41 @@ var replaceResource = function(type, value){
               +gAssetsRoutes.ressources + value
               + '"></iframe>';
     }else if(extension === 'png' || extension === 'jpg' || extension === 'jpeg'){
-      return '<img class="ressource-image" src="'+ value +'"></img>';
+      return '<img class="ressource-image" src="'+gAssetsRoutes.ressources +  value +'"></img>';
     }
-  }//TODO : vimeo, eventbrite, storify, ...
+  }else if(type === 'ref'){
+    return '<p class="citation">'+value + '</p>'
+  }else if(type === 'lien-ressource'){
+    var elements = value.split(':');
+    var fichier = elements.shift();
+    var adresse = gAssetsRoutes.ressources + fichier;
+    var texte = elements[0]?elements[0]:'Lien vers ' + fichier;
+    return '<a target="_blank" href="'+adresse+'">'+texte+'</a>';
+  }else if(type === 'cartel-membre'){
+    var names = value.split(' ');
+    var prenom = names.shift().toLowerCase();
+    var nom = names.join('-').toLowerCase().replace(/([\s]+)/g, '-');
+    var replace = '<div '
+          +'membres="$parent.membres" '
+          +'load-with-membre="'
+          +nom + '-' + prenom + '" '
+          +'><div ng-include="\'components/membre-cartel/membre-cartel.html\'"></div></div>';
+    return replace;
+  }else if(type === 'storify'){
+    console.log('url storify : ', value);
+    var base = value.split('?').shift().split(':')[1];
+    console.log(base);
+    return '<div class="storify">'
+            +'<iframe src="'+base+'/embed?border=false'
+            + '" width="100%" height=\'750\' frameborder=no allowtransparency=true></iframe>'
+            + '<script src="'+base+'.js?border=false"></script>'
+            + '<noscript>[<a href="'+base+'" target="_blank">Voir sur Storify</a>]</noscript></div>'
+
+  }else if(type === 'include'){
+    return value;
+  }else{
+    console.log('type of resource : ', type, ' value : ', value);
+  }//TODO : vimeo, eventbrite, ...
 }
 
 var cleanHTMLContent = function(raw){
@@ -48,7 +80,7 @@ var cleanHTMLContent = function(raw){
 
   var $ = cheerio.load(raw);
   var contents = $('body #contents');
-  contents.find('*').removeAttr('class');
+  // contents.find('*').removeAttr('class');
   contents.find('style').remove();
   contents.find('script').remove();
   contents.find('a').attr('target', '_blank')
@@ -56,30 +88,34 @@ var cleanHTMLContent = function(raw){
       var url = $(this).attr('href');
       var redirect = url && url.indexOf('https://www.google.com/url?q=') === 0;
       if(redirect){
-        url = url.split('https://www.google.com/url?q=')[1];
+        url = url.split('https://www.google.com/url?q=')[1].split('&sa')[0];
       }
       var okUrl = url && url.indexOf('http://local/') >= 0;
       if(okUrl){
-        // console.log('local spotted', url);
         var nUrl = url.split('http://local')[1];
         nUrl = nUrl.split('&')[0];
         url = nUrl;
-        // console.log('new url ', url);
       }
       return url;
     });
 
-  //connecting resources
-  var ok;
+  //parsing paragraphs for special stuff
+  var ok, quoteRE = /^(["|'])(.*)(["|'])$/;
   contents.find('p').each(function(i, value){
     var text = $(this).text();
+    //finding blockquotes
+    if(text.match(quoteRE)){
+      var newHtml = $(this).html().replace(/&quot;/g, '');
+      $(this).replaceWith('<blockquote>'+newHtml + '</bloquote');
+    }
+    //find special resources and connect
     while(match = resRE.exec(text)){
       if(match){
         var expression = match[1];
         var expressions = expression.split(':');
         var type = expressions.shift();
         var value = expressions.join(':');
-        var replacement = replaceResource(type, value);
+        var replacement = replaceResource(type, value, text);
         $(this).replaceWith(replacement);
         ok = true;
       }

@@ -7,6 +7,8 @@ angular.module('designEnRechercheApp')
 
       $scope.$parent.routeId = "main";
 
+      $scope.twitterLoaded = false;
+
       //load intro text
       $scope.introStatus = 'loading';
       apiService.getIntroduction(function(err, intro){

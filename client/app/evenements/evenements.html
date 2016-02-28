@@ -15,7 +15,7 @@
       <section class="evenements">
         <div
             ng-include="'components/evt-cartel/evt-cartel.html'"
-            ng-repeat="evenement in data | filter:searchEvenement track by $index"
+            ng-repeat="evenement in data | orderBy:date:'true' | filter:searchEvenement track by $index"
           ></div>
       </section>
     </div>

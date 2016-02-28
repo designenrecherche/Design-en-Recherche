@@ -6,7 +6,7 @@
     <div ng-include="'components/loading-states/error.html'"></div>
   </div>
   <div class="content" ng-switch-when="ok">
-    <div ng-if="!membreId">
+    <div ng-if="!membreId"  class="container">
       <h1>Les chercheurs du réseau</h1>
       <form class="search-membre">
         <span class="glyphicon glyphicon-search"></span>
@@ -19,7 +19,9 @@
           ></div>
       </section>
     </div>
-    <div ng-if="membreId" ng-include="'components/membre-page/membre-page.html'" ng-init="membre = data">
-    </div>
+    <div ng-if="membreId"
+          ng-include="'components/membre-page/membre-page.html'" ng-init="membre = data"
+          class="container"
+    ></div>
   </div>
 </section>

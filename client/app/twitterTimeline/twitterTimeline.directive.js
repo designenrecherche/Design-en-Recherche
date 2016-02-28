@@ -6,7 +6,8 @@ angular.module('designEnRechercheApp')
     restrict: 'A',
     scope: {
       cssUrl: "@",
-      autoResize: "="
+      autoResize: "=",
+      twitterLoaded : "="
     },
     link: function (scope, element, attrs) {
       $('body').removeAttr('data-twttr-rendered');
@@ -28,7 +29,10 @@ angular.module('designEnRechercheApp')
           console.log('reload, ', reloadCount);
           $timeout(render, 500);
           return;
+        }else{
+          scope.twitterLoaded = true;
         }
+
         if (scope.cssUrl) {
           body.append($('<link/>', { rel: 'stylesheet', href: scope.cssUrl, type: 'text/css' }));
         }
