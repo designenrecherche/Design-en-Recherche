@@ -286,7 +286,7 @@ var parseGObject = function(object, callback){
 }
 
 var fetchProfileImage = function(person, callback){
-  var personImgUrl = gAssetsRoutes.images_annuaire + person.identifiant + ".png";
+  var personImgUrl = gAssetsRoutes.images_annuaire + encodeURIComponent(person.identifiant) + ".png";
   var magic = {
     jpg: 'ffd8ffe0',
     png: '89504e47',
@@ -303,13 +303,13 @@ var fetchProfileImage = function(person, callback){
       callback(err, person);
     }
     else{
-      var magigNumberInBody = body.toString('hex',0,4);
-      if(magigNumberInBody == magic.png){
+      var magicNumberInBody = body.toString('hex',0,4);
+      if(magicNumberInBody == magic.png || magicNumberInBody == magic.jpg || magicNumberInBody == magic.gif){
         person.image_url = personImgUrl;
         var contents = cleanHTMLContent(body);
         callback(null, person);
       }else{
-        // console.log('fetching image', personImgUrl, ' failed!');
+        console.log('fetching image', personImgUrl, ' failed! ', body.toString('hex',0,12));
         person.image_url = gAssetsRoutes.images_annuaire + 'default.png';
         callback(err, person);
       }
