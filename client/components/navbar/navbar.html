@@ -26,16 +26,17 @@
             class="inline-form"
             ng-submit="goToSearchPage()"
             ng-class="{'search-mode' : showSearch}"
+            ng-click="showSearch = !showSearch"
+
           >
             <input type="submit" style="display:none">
             <span
-            ng-click="showSearch = !showSearch"
             >
-              <span ng-if="!showSearch">Rechercher</span>
               <span
                 class="glyphicon glyphicon-search"
-                style="margin-left : 1em"
+                style="margin-right : 1em"
               ></span>
+              <span ng-if="!showSearch">Rechercher</span>
             </span>
             <!-- <input
               ng-model="$parent.$parent.globalSearch"
@@ -64,6 +65,7 @@
 
               minlength="2"
               input-class=""
+              ng-click="$event.stopPropagation()"
             />
 
           </form>
