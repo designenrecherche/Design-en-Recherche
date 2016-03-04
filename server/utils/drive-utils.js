@@ -8,9 +8,9 @@ var async = require('async');
 var request = require('request');
 var cheerio = require('cheerio');
 var Baobab = require('baobab');
-// var zotero = require('./zotero');
-
-var driveData, tree;
+var fs = require('fs');
+var gRoutesRoutes = './../config/drive_routes.json';
+var driveData, tree, isRefreshing;
 
 
 /*
@@ -160,10 +160,10 @@ var fetchGDSpreadsheet = function(url, finalCallback){
 /*
 DAtA REFRESH PROCESS
 */
+var timer;
 
 var parseGObject = function(object, callback){
   var urlFound;
-  var timer;
   var returned = false;
 
 
@@ -281,6 +281,7 @@ var parseGObject = function(object, callback){
     callback(err, object);
 
     clearInterval(timer);
+    timer = null;
 
   });
 }
@@ -444,14 +445,14 @@ var dateAndNext = function(data, callback){
   }
 }
 
-
-var refreshData = function(){
-
+//I handle the refreshing process : fetch data on google drive, then structure and link it
+var doRefreshData = function(routes){
   async.waterfall(
     [
       //fetch data
       function(callback){
-        async.map(gRoutes, parseGObject, function(err, results){
+
+        async.map(routes, parseGObject, function(err, results){
           if(err){
             console.log('failure in data retrieving');
             callback(err, undefined);
@@ -467,15 +468,36 @@ var refreshData = function(){
       //fetch google public profile images, replace by default if not set
       fetchProfileImages
     ], function(err, results){
-    if(err){
-      console.log('failure in data refreshing :', err);
-    }else{
-      driveData = results;
-      // console.log(JSON.stringify(results.annuaire, null, 6));
-      console.log('drive data refreshed successfully');
-      tree = new Baobab(driveData);
-    }
+      isRefreshing = false;
+      if(err){
+        console.log('failure in data refreshing :', err);
+      }else{
+        driveData = results;
+        // console.log(JSON.stringify(results.annuaire, null, 6));
+        console.log('drive data refreshed successfully');
+        tree = new Baobab(driveData);
+      }
   });
+}
+
+//I handle the refreshing request process
+var refreshData = function(){
+  if(!isRefreshing){
+    isRefreshing = true;
+    console.log('begining to refresh data');
+
+    fs.readFile(__dirname + '/' + gRoutesRoutes, 'utf8', function(err, routes){
+      try{
+        gRoutes = JSON.parse(routes);
+        doRefreshData(gRoutes);
+      }catch(e){
+        console.log('error in fetching routes : ', e);
+      }
+    })
+  }else{
+    console.log('refresh asked, but already refreshing : leaving');
+  }
+
 }
 
 /*

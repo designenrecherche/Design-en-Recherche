@@ -1,8 +1,10 @@
 'use strict';
 
 var _ = require('lodash');
+var utils = require('./../../utils/drive-utils.js');
 
-// Get list of reload-datas
 exports.index = function(req, res) {
-  res.json([]);
+  console.log('reload asked');
+  utils.refreshData();
+  res.redirect('/');
 };
