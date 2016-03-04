@@ -63,7 +63,7 @@ var replaceResource = function(type, value, text){
     console.log(base);
     return '<div class="storify">'
             +'<iframe src="'+base+'/embed?border=false'
-            + '" width="100%" height=\'750\' frameborder=no allowtransparency=true></iframe>'
+            + '" width="100%" height=\'500\' frameborder=no allowtransparency=true></iframe>'
             + '<script src="'+base+'.js?border=false"></script>'
             + '<noscript>[<a href="'+base+'" target="_blank">Voir sur Storify</a>]</noscript></div>'
 

@@ -32,11 +32,12 @@
             <input type="submit" style="display:none">
             <span
             >
+              <span ng-if="!showSearch">Rechercher</span>
               <span
                 class="glyphicon glyphicon-search"
-                style="margin-right : 1em"
+                style="margin-left : 1em"
+                ng-if="!showSearch"
               ></span>
-              <span ng-if="!showSearch">Rechercher</span>
             </span>
             <!-- <input
               ng-model="$parent.$parent.globalSearch"

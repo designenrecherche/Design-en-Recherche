@@ -20,30 +20,38 @@
 
       <div ng-show="membre.researchtopickeywordsseparatedbycomasfr != ''">
         <h4>Mots-clés de recherche</h4>
-        <p>
-          {{ membre.researchtopickeywordsseparatedbycomasfr}}
-        </p>
+        <p ng-bind="membre.researchtopickeywordsseparatedbycomasfr"></p>
       </div>
     </section>
   </section>
 
   <section class="row flexed">
-    <section class="profile-bio">
+    <section
+      class="profile-bio"
+      ng-show="membre.minibio140carfr || membre.minibio140caren || membre.workingcitiesseparatedbycomas != ''"
+    >
           <h2>À propos</h2>
           <p ng-bind="(membre.minibio140carfr.length)?membre.minibio140carfr:membre.minibio140caren">
           </p>
 
-        <div ng-show = "membre.workingcitiesseparatedbycomas != ''">Travaille à {{membre.workingcitiesseparatedbycomas}}.</div>
+        <div ng-show = "membre.workingcitiesseparatedbycomas != ''" ng-bind="'Travaille à '+membre.workingcitiesseparatedbycomas+'.'"></div>
     </section>
 
-    <section class="profile-contacts">
+    <section
+      ng-if = "membre.emailpublic || membre.phonepublic || membre.site || membre.sites.length"
+      class="profile-contacts"
+    >
       <h2>Contacts</h2>
       <div ng-show = "membre.emailpublic != ''">E-mail : {{membre.emailpublic}}</div>
       <div ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>
       <div ng-show = "membre.site != ''">Site web personnel : <a target="_blank" href="{{ membre.site }}">{{ membre.site }}</a></div>
-      <div ng-show = "membre.sites">
+      <div ng-show = "membre.sites.length > 0">
         <p>Autres sites :
-          <a  ng-repeat="site in membre.sites" target="_blank" href="{{site.url}}">{{site.text}} </a>
+          <span ng-repeat="site in membre.sites">
+            <a  target="_blank" ng-href="{{site.url}}">{{site.text}}</a>
+            <span ng-if="!$last">, </span>
+          </span>.
+
         </p>
       </div>
     </section>
@@ -51,33 +59,38 @@
 
 
   <section class="profile-these row">
-    <div>
+    <div
+      ng-if="membre.phdthesistitlefr || membre.phdthesistitleen || membre.phdsupervisornamesurname || membre.phdadvisorcoencadrantnamesurnamesparatedbycomas"
+    >
       <h2>Thèse</h2>
       <blockquote class="titre-these" ng-bind="(membre.phdthesistitlefr.length)?membre.phdthesistitlefr:membre.phdthesistitleen">
       </blockquote>
 
       <!--direction-->
       <div ng-show="membre.phdsupervisornamesurname != ''">
-        <p>
-          Direction : {{membre.phdsupervisornamesurname}}
+        <p
+          ng-bind="'Direction : '+membre.phdsupervisornamesurname"
+        >
         </p>
       </div>
       <!--autres encadrants-->
       <div ng-show="membre.phdadvisorcoencadrantnamesurnamesparatedbycomas != ''">
-        <p>
-          Autres encadrants : {{membre.phdadvisorcoencadrantnamesurnamesparatedbycomas}}
+        <p
+          ng-bind="'Autres encadrants : '+membre.phdadvisorcoencadrantnamesurnamesparatedbycomas"
+        >
         </p>
       </div>
 
       <!--dates et fin-->
       <div ng-show="membre.startyear">
         <p>
-          Recherche doctorale débutée en {{membre.startyear}}<span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
+          <span ng-bind="'Recherche doctorale débutée en '+membre.startyear"></span>
+          <span ng-show="membre.defenseyeariffinished">, soutenue en {{membre.defenseyeariffinished}}</span>.
         </p>
       </div>
 
-      <h4>Résumé de la thèse :</h4>
-      <blockquote class="description-these" ng-bind="(membre.phddescriptionfr.length)?membre.phddescriptionfr:membre.phddescriptionen">
+      <h4 ng-if="membre.phddescriptionfr || membre.phddescriptionen">Résumé de la thèse :</h4>
+      <blockquote ng-if="membre.phddescriptionfr || membre.phddescriptionen" class="description-these" ng-bind="(membre.phddescriptionfr.length)?membre.phddescriptionfr:membre.phddescriptionen">
       </blockquote>
     </div>
   </section>

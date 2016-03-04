@@ -49,6 +49,10 @@ a:active
     color: inherit;
 }
 
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+    border : none!important;
+    background : inherit!important;
+}
 
 /*
 GLOBAL LAYOUT
@@ -149,7 +153,7 @@ footer > .container
 {
     width: 10em;
     height: 6em;
-    margin-top: .5em;
+    margin-top: .1em;
 }
 
 .navbar #brand-text
@@ -175,8 +179,39 @@ footer > .container
     left: 8em;
 }
 
+@media (max-width: 1000px){
+
+    .navbar #designLogo
+    {
+
+    }
+
+    .scroll-at-top #designLogo{
+        margin-top : .8em;
+        width: 8em;
+        height: 8em;
+    }
+
+
+    .navbar #brand-text
+    {
+        display : none;
+    }
+}
+
 @media (max-width: 768px)
 {
+
+    .angucomplete-dropdown{
+        display : none;
+    }
+    #recherche .glyphicon-search{
+        display : none;
+    }
+    .navbar #recherche input{
+        width : 100%;
+    }
+
     .navbar-toggle
     {
         margin-top: 0;
@@ -208,6 +243,7 @@ footer > .container
 
     .navbar #brand-text
     {
+        display : block;
         font-size: .7em;
         line-height: 1.05em;
 
@@ -513,8 +549,13 @@ SPECIFIC COMPONENTS STYLING
 {
     padding: 0;
 
-    color: @textColor;
+   color: @textColor;
     border: none;
+    width : 100%;
+}
+
+.navbar #recherche input{
+    width : 5em;
 }
 
 
@@ -574,6 +615,10 @@ SPECIFIC COMPONENTS STYLING
     padding: 3em 0 3em 0;
     // border-top : 1px solid @borderColor;
 
+}
+
+.membre-page .row:not(:last-of-type)
+{
     border-bottom: 1px solid @borderColor;
 }
 .membre-page .top-cartel img

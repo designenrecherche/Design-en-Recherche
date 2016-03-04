@@ -39,7 +39,9 @@ angular.module('designEnRechercheApp')
         else if(site.indexOf('flickr')> -1)
           out.text = "Flickr";
         else out.text = site.trim();
-        outputSites.push(out);
+        if(out.text){
+          outputSites.push(out);
+        }
       }
       $scope.membre.sites = outputSites;
     }

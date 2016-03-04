@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('designEnRechercheApp')
-  .controller('MasterCtrl', function ($scope, apiService, $location) {
+  .controller('MasterCtrl', function ($scope, apiService, $location, $rootScope, $document) {
     var init = function(){
       $scope.globalSearch = "";
       setTimeout(function(){
