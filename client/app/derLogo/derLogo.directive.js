@@ -242,10 +242,10 @@ angular.module('designEnRechercheApp')
       function nodeUp(){
         var data;
         d3.select(this).call(function(d){data = d[0][0].__data__;})
-        d3.select(this).selectAll('.forme,.cache').transition().attr('r', der.bigRadius*1.3).attr('fill', 'black').attr('stroke-width', 8);
+        d3.select(this).selectAll('.forme,.cache').transition().attr('r', der.bigRadius*1.3).attr('fill', 'black').attr('stroke-width', 4);
         d3.select(this).select('image').transition()
-        .attr('x', -der.bigRadius+2).attr('y', -der.bigRadius+2)
-        .attr('width', der.bigRadius*2-4).attr('height', der.bigRadius*2-4);
+        .attr('x', -der.bigRadius).attr('y', -der.bigRadius)
+        .attr('width', der.bigRadius*2).attr('height', der.bigRadius*2);
         return this;
       };
 

@@ -9,7 +9,7 @@ angular.module('designEnRechercheApp')
         var update = function(){
           nav = $document.find(selector);
           navHeight = nav.outerHeight();
-          element.css('marginTop', navHeight);
+          element.css('marginTop' , navHeight);
         }
 
         update();
