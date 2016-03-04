@@ -7,7 +7,8 @@ angular.module('designEnRechercheApp', [
   'ngRoute',
   'ui.bootstrap',
   'angucomplete-alt',
-  'angularytics'
+  'angularytics',
+  'ngtweet'
 ])
   .config(function ($routeProvider, $locationProvider, AngularyticsProvider) {
     $routeProvider
