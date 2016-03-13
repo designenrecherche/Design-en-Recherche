@@ -1,0 +1,148 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'bunyip' ]
+2 info using npm@2.11.2
+3 info using node@v0.10.25
+4 verbose node symlink /usr/bin/node
+5 verbose install initial load of /usr/lib/package.json
+6 verbose readDependencies loading dependencies from /usr/lib/package.json
+7 silly cache add args [ 'bunyip', null ]
+8 verbose cache add spec bunyip
+9 silly cache add parsed spec { raw: 'bunyip',
+9 silly cache add   scope: null,
+9 silly cache add   name: 'bunyip',
+9 silly cache add   rawSpec: '',
+9 silly cache add   spec: '*',
+9 silly cache add   type: 'range' }
+10 silly addNamed bunyip@*
+11 verbose addNamed "*" is a valid semver range for bunyip
+12 silly addNameRange { name: 'bunyip', range: '*', hasData: false }
+13 silly mapToRegistry name bunyip
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry uri https://registry.npmjs.org/bunyip
+17 verbose addNameRange registry:https://registry.npmjs.org/bunyip not in flight; fetching
+18 verbose request uri https://registry.npmjs.org/bunyip
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 19:04:19
+21 verbose request id b0ee1684205311fc
+22 http request GET https://registry.npmjs.org/bunyip
+23 http 200 https://registry.npmjs.org/bunyip
+24 silly get cb [ 200,
+24 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+24 silly get     etag: '"5UQ5JHKMKEN2Q8MV945Y3N06L"',
+24 silly get     'content-type': 'application/json',
+24 silly get     'cache-control': 'max-age=300',
+24 silly get     'content-length': '33837',
+24 silly get     'accept-ranges': 'bytes',
+24 silly get     date: 'Sun, 13 Mar 2016 18:04:25 GMT',
+24 silly get     via: '1.1 varnish',
+24 silly get     age: '0',
+24 silly get     connection: 'keep-alive',
+24 silly get     'x-served-by': 'cache-lcy1134-LCY',
+24 silly get     'x-cache': 'MISS',
+24 silly get     'x-cache-hits': '0',
+24 silly get     'x-timer': 'S1457892264.881987,VS0,VE196',
+24 silly get     vary: 'Accept' } ]
+25 verbose get saving bunyip to /home/rawbin/.npm/registry.npmjs.org/bunyip/.cache.json
+26 silly addNameRange number 2 { name: 'bunyip', range: '*', hasData: true }
+27 silly addNameRange versions [ 'bunyip',
+27 silly addNameRange   [ '0.1.0', '0.1.1', '0.1.2', '0.1.3', '0.2.0', '0.2.1', '0.2.2' ] ]
+28 silly addNamed bunyip@0.2.2
+29 verbose addNamed "0.2.2" is a plain semver version for bunyip
+30 silly mapToRegistry name bunyip
+31 silly mapToRegistry using default registry
+32 silly mapToRegistry registry https://registry.npmjs.org/
+33 silly mapToRegistry uri https://registry.npmjs.org/bunyip
+34 verbose addRemoteTarball https://registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz not in flight; adding
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz',
+35 verbose addRemoteTarball   'ca5a9203c87951f6241c9f042fe574903ef73e7c' ]
+36 info retry fetch attempt 1 at 19:04:25
+37 info attempt registry request try #1 at 19:04:25
+38 http fetch GET https://registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz
+39 http fetch 200 https://registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz
+40 silly fetchAndShaCheck shasum ca5a9203c87951f6241c9f042fe574903ef73e7c
+41 verbose addTmpTarball /tmp/npm-14961-6de58329/registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz not in flight; adding
+42 verbose addTmpTarball already have metadata; skipping unpack for bunyip@0.2.2
+43 silly cache afterAdd bunyip@0.2.2
+44 verbose afterAdd /home/rawbin/.npm/bunyip/0.2.2/package/package.json not in flight; writing
+45 verbose afterAdd /home/rawbin/.npm/bunyip/0.2.2/package/package.json written
+46 silly install resolved [ { name: 'bunyip',
+46 silly install resolved     description: 'Automate client-side unit testing in real browsers using the cli',
+46 silly install resolved     version: '0.2.2',
+46 silly install resolved     preferGlobal: true,
+46 silly install resolved     homepage: 'http://ryanseddon.github.com/bunyip',
+46 silly install resolved     author: { name: 'Ryan Seddon', url: 'http://www.thecssninja.com/' },
+46 silly install resolved     repository: { type: 'git', url: 'git://github.com:ryanseddon/bunyip.git' },
+46 silly install resolved     bugs: { url: 'https://github.com/ryanseddon/bunyip/issues' },
+46 silly install resolved     licenses: [ [Object] ],
+46 silly install resolved     main: 'lib/bunyip',
+46 silly install resolved     bin: { bunyip: './cli.js' },
+46 silly install resolved     engines: { node: '~0.8.x' },
+46 silly install resolved     scripts: { test: 'vows test/*.js' },
+46 silly install resolved     dependencies: { commander: '0.6.x', browserstack: '0.1.x', yeti: '>=0.2.14' },
+46 silly install resolved     devDependencies:
+46 silly install resolved      { grunt: '~0.3.9',
+46 silly install resolved        'cli-easy': '0.1.x',
+46 silly install resolved        vows: '>= 0.5.8',
+46 silly install resolved        mockery: '>= 1.1.2' },
+46 silly install resolved     keywords: [ 'unit tests', 'bunyip', 'browserstack', 'mobile', 'cli' ],
+46 silly install resolved     readme: '# bunyip\r\n\r\nAutomate client-side unit testing in real browsers using the CLI\r\n\r\n## Getting Started\r\nInstall the module with: `npm install -g bunyip`. This is a CLI tool so it needs to be globally installed.\r\n\r\n### BrowserStack account\r\nIn order for bunyip to flex its real muscle I recommend you get a paid [BrowserStack account](http://www.browserstack.com/pricing) as all paid accounts have access to their API. Without the API you\'ll need to connect your own slave browsers to bunyip.\r\n\r\n### localhost sharing service\r\nIf you wish to test on devices that are not part of your local network you\'ll be required to setup a tunneling service. I recommend [pagekite](https://pagekite.net/support/quickstart/) as it gives you a nice free chunk of data and allows you to specify a reusable subdomain. [Showoff.io](https://showoff.io/) is another good option.\r\n\r\n### Setup the config.js file\r\nIf you don\'t wish to use BrowserStack or a localhost sharing service you can skip this step.\r\n\r\nTo generate a config file you can run this command:\r\n\r\n`bunyip config path/to/config.js`\r\n\r\nThis will take you through a multistep process to setup your username, password, tunnel url and tunnel command.\r\n\r\nSo I if wanted to save a config file to my home directory I would do the following.\r\n\r\n`bunyip config ~/config.js`\r\n\r\n### Specify config file to use\r\n\r\nIf I want to specify a specific config file to use the `-c, --cdir` flag lets you do that.\r\n\r\n`bunyip -f test/tests.html -c path/to/config.js`\r\n\r\nIf you do not specify a config file to use it will look in your current working directory for a file name `config.js` otherwise it will not require one in.\r\n\r\n## Test suite adaptors\r\n\r\nBehind the scenes bunyip uses a tool called Yeti unfortunately Yeti only works with YUI Test. However I have written some [adaptors](https://github.com/ryanseddon/yeti-adaptors) for QUnit and jasmine, go check out my other repo for examples on using them with your current test suites.\r\n\r\nIf you use another client-side testsuite please feel free to contribute it to my [yeti-adaptors](https://github.com/ryanseddon/yeti-adaptors) repo.\r\n\r\n## Examples\r\n\r\n```bash\r\nbunyip -f index.html\r\n```\r\n\r\nThe above command will launch a simple Yeti hub on port 9000 and use the `index.html` inside your current working directory.\r\n\r\n```bash\r\nbunyip -f index.html -p 1337\r\n```\r\n\r\nThis will change the port that is used. The global config value will be updated for you so don\'t worry.\r\n\r\n### Locally installed browsers\r\n\r\nUsing the `local` command you can now open your test suite in all locally installed browsers or specify a series of browsers\r\n\r\n```bash\r\nbunyip -f index.html local\r\n```\r\n\r\nThis will open in all locally installed browsers with one assumption that phantomjs is installed in `/usr/bin/`.\r\n\r\n```bash\r\nbunyip -f index.html local -l "firefox|chrome|safari|phantomjs"\r\n```\r\n\r\nThis will open the installed versions of Firefox, Chrome, Safari and Phantomjs.\r\n\r\nThe `local` command looks for the following browsers:\r\n\r\n* Firefox, Firefox Nightly\r\n* Chrome, Chrome Canary\r\n* Opera, Opera Next\r\n* Safari\r\n* Phantomjs\r\n\r\n### BrowserStack workers\r\n\r\n```bash\r\nbunyip -f index.html -b ios\r\n```\r\n\r\nAssuming you have a BrowserStack paid account and have setup a localhost sharing service the `-b ios` will send off a command to launch all iOS devices (3 iPhones and 3 iPads) on BrowserStack and once they\'re connected you can run your test suite.\r\n\r\n```bash\r\nbunyip -s\r\n```\r\n\r\nThis will query the BrowserStack API for any device or browsers that are currently running on your account.\r\n\r\n```bash\r\nbunyip -k <id> or all\r\n```\r\n\r\nIf you no longer need a specific worker or you wish to destroy all of them you can either specify a single worker id or `all` and it will destroy said worker(s).\r\n\r\n```bash\r\nbunyip -h\r\n```\r\n\r\nFor more info specify the help flag to get more info about each command flag available.\r\n\r\n## Contributing\r\nIn lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).\r\n\r\n## Release History\r\n* 25/10/2012 - v0.2.2 - Fixes incompatibility with latest yeti release.\r\n* 20/08/2012 - v0.2.0 - Added a `local` command to run your test suite in locally installed browsers.\r\n* 15/07/2012 - v0.1.3 - Added ability to generate config file and to specify location of config file to use.\r\n\r\n## License\r\nCopyright (c) 2012 Ryan Seddon  \r\nLicensed under the MIT license.\r\n',
+46 silly install resolved     _id: 'bunyip@0.2.2',
+46 silly install resolved     dist:
+46 silly install resolved      { shasum: 'ca5a9203c87951f6241c9f042fe574903ef73e7c',
+46 silly install resolved        tarball: 'http://registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz' },
+46 silly install resolved     _npmVersion: '1.1.59',
+46 silly install resolved     _npmUser: { name: 'ryanseddon', email: 'seddon.ryan@gmail.com' },
+46 silly install resolved     maintainers: [ [Object] ],
+46 silly install resolved     directories: {},
+46 silly install resolved     _shasum: 'ca5a9203c87951f6241c9f042fe574903ef73e7c',
+46 silly install resolved     _resolved: 'https://registry.npmjs.org/bunyip/-/bunyip-0.2.2.tgz',
+46 silly install resolved     _from: 'bunyip@*' } ]
+47 info install bunyip@0.2.2 into /usr/lib
+48 info installOne bunyip@0.2.2
+49 verbose installOne of bunyip to /usr/lib not in flight; installing
+50 verbose lock using /home/rawbin/.npm/_locks/bunyip-9ea2124e1840f6d2.lock for /usr/lib/node_modules/bunyip
+51 warn engine bunyip@0.2.2: wanted: {"node":"~0.8.x"} (current: {"node":"0.10.25","npm":"2.11.2"})
+52 silly install write writing bunyip 0.2.2 to /usr/lib/node_modules/bunyip
+53 verbose unbuild lib/node_modules/bunyip
+54 silly gentlyRm /usr/lib/node_modules/bunyip is being purged from base /usr
+55 verbose gentlyRm don't care about contents; nuking /usr/lib/node_modules/bunyip
+56 verbose tar unpack /home/rawbin/.npm/bunyip/0.2.2/package.tgz
+57 verbose tar unpacking to /usr/lib/node_modules/bunyip
+58 silly gentlyRm /usr/lib/node_modules/bunyip is being purged
+59 verbose gentlyRm don't care about contents; nuking /usr/lib/node_modules/bunyip
+60 silly gunzTarPerm modes [ '775', '664' ]
+61 error tar.unpack untar error /home/rawbin/.npm/bunyip/0.2.2/package.tgz
+62 verbose unlock done using /home/rawbin/.npm/_locks/bunyip-9ea2124e1840f6d2.lock for /usr/lib/node_modules/bunyip
+63 verbose fstream_path /usr/lib/node_modules/bunyip
+64 verbose fstream_type Directory
+65 verbose fstream_class DirWriter
+66 verbose stack Error: EACCES, mkdir '/usr/lib/node_modules/bunyip'
+67 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25
+67 verbose fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53
+67 verbose fstream_stack Object.oncomplete (fs.js:107:15)
+68 verbose cwd /home/rawbin/Projets/_1projets_en_cours/design-en-recherche-drive
+69 error Linux 3.19.0-51-generic
+70 error argv "node" "/usr/local/bin/npm" "install" "-g" "bunyip"
+71 error node v0.10.25
+72 error npm  v2.11.2
+73 error path /usr/lib/node_modules/bunyip
+74 error code EACCES
+75 error errno 3
+76 error Error: EACCES, mkdir '/usr/lib/node_modules/bunyip'
+76 error  { [Error: EACCES, mkdir '/usr/lib/node_modules/bunyip']
+76 error   errno: 3,
+76 error   code: 'EACCES',
+76 error   path: '/usr/lib/node_modules/bunyip',
+76 error   fstream_type: 'Directory',
+76 error   fstream_path: '/usr/lib/node_modules/bunyip',
+76 error   fstream_class: 'DirWriter',
+76 error   fstream_stack:
+76 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:35:25',
+76 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:47:53',
+76 error      'Object.oncomplete (fs.js:107:15)' ] }
+77 error Please try running this command again as root/Administrator.
+78 verbose exit [ 3, true ]
+79 verbose unbuild lib/node_modules/bunyip
+80 silly gentlyRm /usr/lib/node_modules/bunyip is being purged from base /usr
+81 verbose gentlyRm don't care about contents; nuking /usr/lib/node_modules/bunyip

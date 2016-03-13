@@ -13,7 +13,10 @@ module.exports = function(config) {
               'karma-phantomjs-launcher',
               'karma-ng-html2js-preprocessor',
               'karma-chrome-launcher',
-              'karma-firefox-launcher'
+              'karma-firefox-launcher',
+              'karma-opera-launcher'
+              // 'karma-safari-launcher', //do it if you are on mac or windows
+              // 'karma-ie-launcher' //do it if you are on windows
               ],
 
     // list of files / patterns to load in the browser
@@ -29,6 +32,11 @@ module.exports = function(config) {
       'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/angucomplete-alt/dist/angucomplete-alt.min.js',
+      'client/bower_components/d3/d3.min.js',
+      'client/bower_components/angularytics/dist/angularytics.min.js',
+      'client/bower_components/ngtweet/dist/ngtweet.min.js',
+
       'client/app/app.js',
       // 'client/app/app.coffee',
       'client/app/**/*.js',
@@ -78,7 +86,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS', 'Chrome', 'Firefox', 'Opera', 'Safari', 'IE'],
+    browsers: ['PhantomJS', 'Chrome', 'Firefox', 'Opera'/*, 'Safari', 'IE'*/],
 
 
     // Continuous Integration mode
