@@ -11,14 +11,17 @@ describe('Controller: MainCtrl', function () {
 
 
   beforeEach(inject(function ($controller, $rootScope) {
-    // scope = $rootScope.$new();
-    // MainCtrl = $controller('MainCtrl', {
-    //   $scope: scope
-    // });
+    scope = $rootScope.$new();
+    MainCtrl = $controller('MainCtrl', {
+      $scope: scope
+    });
   }));
 
   it('should have an intro status', function () {
-    expect(true).toBe(true);
-    // expect(scope.introStatus).toBe('loading');
+    expect(scope.introStatus).toBe('loading');
+  });
+
+  it('should have set parent route id as main', function () {
+    expect(scope.$parent.routeId).toBe('main');
   });
 });

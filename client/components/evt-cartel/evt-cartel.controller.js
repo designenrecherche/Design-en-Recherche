@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('designEnRechercheApp')
-  .controller('EvtCartel', function ($scope, $location) {
+  .controller('EvtCartel', function ($scope) {
     var mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+
     $scope.prettyDate = function(date){
       date = date && new Date(date);
       var ok = date.getMonth;
@@ -13,6 +14,6 @@ angular.module('designEnRechercheApp')
         var day = date.getDate();
         return day + ' ' + month + ' ' + date.getFullYear();
       }
-    }
+    };
 
   });

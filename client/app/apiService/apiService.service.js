@@ -22,7 +22,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.getMembres = function(id, callback){
@@ -34,7 +34,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.getAPropos = function(callback){
@@ -45,7 +45,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.getContact = function(callback){
@@ -56,7 +56,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.getIntroduction = function(callback){
@@ -67,7 +67,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.getReseaux = function(callback){
@@ -78,7 +78,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.getProchainsEvts = function(callback){
@@ -89,7 +89,7 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
 
     factory.search = function(expression, callback){
@@ -101,9 +101,8 @@ angular.module('designEnRechercheApp')
         })
         .error(function(e){
           callback(e, undefined);
-        })
+        });
     };
-
 
 
     return factory;

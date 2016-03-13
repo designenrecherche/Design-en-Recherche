@@ -7,6 +7,7 @@ angular.module('designEnRechercheApp')
 
       //load intro text
       $scope.reseauxStatus = 'loading';
+
       apiService.getReseaux(function(err, reseaux){
         if(err){
           $scope.reseauxStatus = 'error';
@@ -31,8 +32,8 @@ angular.module('designEnRechercheApp')
 
       setTimeout(function(){
         $scope.$apply();
-      })
-    }
+      });
+    };
 
     init();
   });

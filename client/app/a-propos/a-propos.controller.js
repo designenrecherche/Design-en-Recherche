@@ -20,8 +20,8 @@ angular.module('designEnRechercheApp')
 
       setTimeout(function(){
         $scope.$apply();
-      })
-    }
+      });
+    };
 
     init();
   });

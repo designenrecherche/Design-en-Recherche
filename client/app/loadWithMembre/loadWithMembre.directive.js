@@ -7,7 +7,7 @@ angular.module('designEnRechercheApp')
         membres : '=',
         membreId : '@loadWithMembre'
       },
-      link: function (scope, element, attrs) {
+      link: function (scope, element /*, attrs*/) {
         scope.hasMembre = false;
 
         var update = function(membres){
@@ -16,17 +16,18 @@ angular.module('designEnRechercheApp')
           }
           membres.some(function(m){
             if(m.identifiant === scope.membreId){
-              return scope.membre = m;
+              scope.membre = m;
+              return true;
             }
           });
           $timeout(function(){
-            if(scope.hasMembre == false){
+            if(scope.hasMembre === false){
               scope.hasMembre = true;
               $compile(element.find('div[ng-include]'))(scope);
               scope.$apply();
             }
           }, 500);
-        }
+        };
 
         update(scope.membres);
         scope.$watch('membres', update);

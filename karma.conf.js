@@ -7,9 +7,10 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'jasmine-matchers'],
 
     plugins : ['karma-jasmine',
+              'karma-jasmine-matchers',
               'karma-phantomjs-launcher',
               'karma-ng-html2js-preprocessor',
               'karma-chrome-launcher',
@@ -32,6 +33,7 @@ module.exports = function(config) {
       'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/app/app-ga-karma-workaround.js',
       'client/bower_components/angucomplete-alt/dist/angucomplete-alt.min.js',
       'client/bower_components/d3/d3.min.js',
       'client/bower_components/angularytics/dist/angularytics.min.js',
@@ -71,7 +73,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_WARN,
 
 
     // enable / disable watching file and executing tests whenever any file changes

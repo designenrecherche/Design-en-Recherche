@@ -5,7 +5,7 @@ angular.module('designEnRechercheApp')
 
     var init = function(){
 
-      $scope.$parent.routeId = "main";
+      $scope.$parent.routeId = 'main';
 
       $scope.twitterLoaded = false;
 
@@ -33,8 +33,8 @@ angular.module('designEnRechercheApp')
 
       setTimeout(function(){
         $scope.$apply();
-      })
-    }
+      });
+    };
 
     init();
   });
