@@ -13,14 +13,14 @@ exports.index = function(req, res) {
 
     var ok = evenements && evenements.length;
     if(!ok){
-      return res.json({});
+      return res.json([]);
     }
 
     evenements.some(function(evenement){
       if(evenement.identifiant === req.params.id){
         if(evenement.page_visible)
           return res.json(evenement);
-        else res.json({});
+        else res.json([]);
       }
     });
   }else{

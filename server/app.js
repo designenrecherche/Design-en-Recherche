@@ -21,11 +21,12 @@ server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-console.log('refresh rate', driveUtils.getDriveRefreshRate());
-driveUtils.refreshData();
 
-setInterval(driveUtils.refreshData, driveUtils.getDriveRefreshRate());
-
+// console.log('refresh rate', driveUtils.getDriveRefreshRate());
+setTimeout(function(){
+  driveUtils.refreshData();
+  setInterval(driveUtils.refreshData, driveUtils.getDriveRefreshRate());
+}, 500);
 
 
 // Expose app

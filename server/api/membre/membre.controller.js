@@ -11,7 +11,7 @@ exports.index = function(req, res) {
         membre;
     var ok = annuaire && annuaire.length;
     if(!ok){
-      return res.json({});
+      return res.json([]);
     }
 
     annuaire.some(function(membre){

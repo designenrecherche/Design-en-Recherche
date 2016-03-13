@@ -512,7 +512,7 @@ var renderGData = function(){
     }
     return tree.select(args).get();
   }else{
-    return driveData;
+    return driveData || [];
   }
 }
 

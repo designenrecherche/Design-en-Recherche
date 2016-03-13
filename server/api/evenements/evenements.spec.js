@@ -13,6 +13,7 @@ describe('GET /api/evenements', function() {
       .expect('Content-Type', /json/)
       .end(function(err, res) {
         if (err) return done(err);
+        //because should return an empty object at startup
         res.body.should.be.instanceof(Array);
         done();
       });
