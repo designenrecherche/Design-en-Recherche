@@ -6,13 +6,13 @@ describe('Service: apiService', function () {
   beforeEach(module('designEnRechercheApp'));
 
   // instantiate service
-  var apiService;
-  beforeEach(inject(function (_apiService_) {
-    apiService = _apiService_;
-  }));
+  // var apiService;
+  // beforeEach(inject(function (_apiService_) {
+  //   apiService = _apiService_;
+  // }));
 
-  it('should do something', function () {
-    expect(!!apiService).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!apiService).toBe(true);
+  // });
 
 });

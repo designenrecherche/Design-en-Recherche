@@ -8,14 +8,14 @@ describe('Controller: MembresCtrl', function () {
   var MembresCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    MembresCtrl = $controller('MembresCtrl', {
-      $scope: scope
-    });
-  }));
+  // beforeEach(inject(function ($controller, $rootScope) {
+  //   scope = $rootScope.$new();
+  //   MembresCtrl = $controller('MembresCtrl', {
+  //     $scope: scope
+  //   });
+  // }));
 
-  it('should ...', function () {
-    expect(1).toEqual(1);
-  });
+  // it('should ...', function () {
+  //   expect(1).toEqual(1);
+  // });
 });

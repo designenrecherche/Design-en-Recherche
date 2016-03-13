@@ -8,14 +8,14 @@ describe('Controller: RechercheCtrl', function () {
   var RechercheCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    RechercheCtrl = $controller('RechercheCtrl', {
-      $scope: scope
-    });
-  }));
+  // beforeEach(inject(function ($controller, $rootScope) {
+  //   scope = $rootScope.$new();
+  //   RechercheCtrl = $controller('RechercheCtrl', {
+  //     $scope: scope
+  //   });
+  // }));
 
-  it('should ...', function () {
-    expect(1).toEqual(1);
-  });
+  // it('should ...', function () {
+  //   expect(1).toEqual(1);
+  // });
 });

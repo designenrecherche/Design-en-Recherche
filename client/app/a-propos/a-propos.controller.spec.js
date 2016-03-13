@@ -8,14 +8,14 @@ describe('Controller: AProposCtrl', function () {
   var AProposCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    AProposCtrl = $controller('AProposCtrl', {
-      $scope: scope
-    });
-  }));
+  // beforeEach(inject(function ($controller, $rootScope) {
+  //   scope = $rootScope.$new();
+  //   AProposCtrl = $controller('AProposCtrl', {
+  //     $scope: scope
+  //   });
+  // }));
 
-  it('should ...', function () {
-    expect(1).toEqual(1);
-  });
+  // it('should ...', function () {
+  //   expect(1).toEqual(1);
+  // });
 });

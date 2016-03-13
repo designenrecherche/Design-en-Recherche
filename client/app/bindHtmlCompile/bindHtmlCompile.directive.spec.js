@@ -8,13 +8,13 @@ describe('Directive: bindHtmlCompile', function () {
   var element,
     scope;
 
-  beforeEach(inject(function ($rootScope) {
-    scope = $rootScope.$new();
-  }));
+  // beforeEach(inject(function ($rootScope) {
+  //   scope = $rootScope.$new();
+  // }));
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<bind-html-compile></bind-html-compile>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the bindHtmlCompile directive');
-  }));
+  // it('should make hidden element visible', inject(function ($compile) {
+  //   element = angular.element('<bind-html-compile></bind-html-compile>');
+  //   element = $compile(element)(scope);
+  //   expect(element.text()).toBe('this is the bindHtmlCompile directive');
+  // }));
 });
