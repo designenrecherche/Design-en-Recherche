@@ -9,7 +9,12 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
-    plugins : ['karma-jasmine', 'karma-phantomjs-launcher'],
+    plugins : ['karma-jasmine',
+              'karma-phantomjs-launcher',
+              'karma-ng-html2js-preprocessor',
+              'karma-chrome-launcher',
+              'karma-firefox-launcher'
+              ],
 
     // list of files / patterns to load in the browser
     files: [
@@ -25,13 +30,13 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/app/app.js',
-      'client/app/app.coffee',
+      // 'client/app/app.coffee',
       'client/app/**/*.js',
-      'client/app/**/*.coffee',
+      // 'client/app/**/*.coffee',
       'client/components/**/*.js',
-      'client/components/**/*.coffee',
-      'client/app/**/*.jade',
-      'client/components/**/*.jade',
+      // 'client/components/**/*.coffee',
+      // 'client/app/**/*.jade',
+      // 'client/components/**/*.jade',
       'client/app/**/*.html',
       'client/components/**/*.html'
     ],
@@ -73,7 +78,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS', 'Chrome', 'Firefox', 'Opera', 'Safari', 'IE'],
 
 
     // Continuous Integration mode
