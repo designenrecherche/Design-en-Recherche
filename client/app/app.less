@@ -253,6 +253,10 @@ footer > .container
         top: .5em;
         left: 7em;
     }
+
+    .cartel-wrapper{
+        width : 100%!important;
+    }
 }
 
 /*
@@ -439,6 +443,42 @@ SPECIFIC COMPONENTS STYLING
 {
     background: @mainColor;
 }
+
+
+
+
+.view-wrapper#main .navbar a
+{
+    border-bottom : @navBorder solid @mainColor;
+}
+
+.view-wrapper#evenements .navbar a
+{
+    border-bottom : @navBorder solid @evenementsColor;
+}
+
+.view-wrapper#membres .navbar a
+{
+    border-bottom : @navBorder solid @membresColor;
+}
+
+.view-wrapper#contact .navbar a
+{
+    border-bottom : @navBorder solid @contactColor;
+}
+
+.view-wrapper#a-propos .navbar a
+{
+    border-bottom : @navBorder solid @aProposColor;
+}
+
+.view-wrapper#recherche .navbar a
+{
+    border-bottom : @navBorder solid @mainColor;
+}
+
+
+
 
 
 .navbar,
@@ -715,6 +755,16 @@ twitter-timeline{
 .search-global input
 {
     background: @borderColor;
+}
+
+
+section.membres{
+    flex-flow : row wrap;
+    display : flex;
+}
+
+.cartel-wrapper{
+    width : 49%;
 }
 
 /*contact */

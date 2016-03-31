@@ -15,6 +15,7 @@
       <section class="membres">
         <div
             ng-include="'components/membre-cartel/membre-cartel.html'"
+            class="cartel-wrapper"
             ng-repeat="membre in data | orderBy:'name' | filter:searchMembre track by $index"
           ></div>
       </section>
