@@ -37,6 +37,8 @@ angular.module('designEnRechercheApp')
           out.text = 'Academia';
         else if(site.indexOf('flickr')> -1)
           out.text = 'Flickr';
+        else if(site.indexOf('viadeo')> -1)
+          out.text = 'Viadeo';
         else out.text = site.trim();
         if(out.text){
           outputSites.push(out);
