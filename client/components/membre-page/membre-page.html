@@ -42,16 +42,12 @@
       class="profile-contacts"
     >
       <h2>Contacts</h2>
-      <div itemprop="email" ng-show = "membre.emailpublic != ''">E-mail : {{membre.emailpublic}}</div>
-      <div itemprop="telephone" ng-show = "membre.phonepublic != ''">Téléphone : {{membre.phonepublic}}</div>
-      <div itemprop="url" ng-show = "membre.site != ''">Site web personnel : <a target="_blank" href="{{ membre.site }}">{{ membre.site }}</a></div>
+      <div itemprop="email" ng-show = "membre.emailpublic != ''" ng-bind="'E-mail : '+membre.emailpublic"></div>
+      <div itemprop="telephone" ng-show = "membre.phonepublic != ''" ng-bind="'Téléphone : '+membre.phonepublic"></div>
+      <div itemprop="url" ng-show = "membre.site != ''">Site web personnel : <a target="_blank" href="{{ membre.site }}" ng-bind="membre.site"></a></div>
       <div ng-show = "membre.sites.length > 0">
         <p>Autres sites :
-          <span ng-repeat="site in membre.sites">
-            <a itemprop="url"  target="_blank" ng-href="{{site.url}}">{{site.text}}</a>
-            <span ng-if="!$last">, </span>
-          </span>.
-
+          <span ng-repeat="site in membre.sites"><a itemprop="url"  target="_blank" ng-href="{{site.url}}" ng-bind="site.text"></a><span ng-if="!$last">, </span></span>.
         </p>
       </div>
     </section>
@@ -96,9 +92,11 @@
         </p>
       </div>
 
-      <h4 ng-if="membre.phddescriptionfr || membre.phddescriptionen">Résumé de la thèse :</h4>
-      <blockquote itemprop="description" ng-if="membre.phddescriptionfr || membre.phddescriptionen" class="description-these" ng-bind="(membre.phddescriptionfr.length)?membre.phddescriptionfr:membre.phddescriptionen">
-      </blockquote>
+      <div class="resume-these">
+        <h4 ng-if="membre.phddescriptionfr || membre.phddescriptionen">Résumé de la thèse :</h4>
+        <blockquote itemprop="description" ng-if="membre.phddescriptionfr || membre.phddescriptionen" class="description-these" ng-bind="(membre.phddescriptionfr.length)?membre.phddescriptionfr:membre.phddescriptionen">
+        </blockquote>
+      </div>
     </div>
   </section>
 </div>
