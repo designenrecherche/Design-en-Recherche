@@ -86,10 +86,13 @@ var replaceResource = function(type, value, text){
       return '<iframe width="100%" height="500" src="https://www.youtube.com/embed/'+id+'" frameborder="0" allowfullscreen></iframe>'
     }else return '';
   }else if(type === 'figshare'){
-    var id = value.match(/([\d]{7})$/);
+    var id = value.match(/([\d]{6})/);
+    console.log('got figshare, value : ', value, 'id : ', id);
     var ok = id && id[0];
     if(ok){
       id = id[0];
+      console.log('figshare id : ', id);
+      console.log('<iframe src="https://widgets.figshare.com/articles/'+id+'/embed?show_title=1" width="100%" height="716" frameborder="0"></iframe>')
       return '<iframe src="https://widgets.figshare.com/articles/'+id+'/embed?show_title=1" width="100%" height="716" frameborder="0"></iframe>'
     }else return '';
   }else{
