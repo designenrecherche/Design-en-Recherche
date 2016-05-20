@@ -38,6 +38,10 @@ var replaceResource = function(type, value, text){
               + '"></iframe>';
     }else if(extension === 'png' || extension === 'jpg' || extension === 'jpeg'){
       return '<img class="ressource-image" src="'+gAssetsRoutes.ressources +  value +'"></img>';
+    }else if(extension === 'wav' || extension === 'mp3' || extension === 'ogg' || extension === 'aac' || extension === 'wma'){
+      var adress = gAssetsRoutes.ressources + value;
+      console.log('adresse son : ', adress);
+      return '<audio controls src="'+adress + '">Votre navigateur ne supporte pas l\'élément <code>audio</code>. Retrouvez cette bande sonore à <a href="'+adress+'">l\'adresse suivante</a></audio>';
     }
   }else if(type === 'ref'){
     return '<p class="citation">'+value + '</p>'
@@ -60,18 +64,37 @@ var replaceResource = function(type, value, text){
   }else if(type === 'storify'){
     console.log('url storify : ', value);
     var base = value.split('?').shift().split(':')[1];
-    console.log(base);
     return '<div class="storify">'
             +'<iframe src="'+base+'/embed?border=false'
             + '" width="100%" height=\'500\' frameborder=no allowtransparency=true></iframe>'
             + '<script src="'+base+'.js?border=false"></script>'
             + '<noscript>[<a href="'+base+'" target="_blank">Voir sur Storify</a>]</noscript></div>'
-
   }else if(type === 'include'){
     return value;
+  }else if(type === 'vimeo'){
+    var id = value.match(/([\d]){8}/);
+    var ok = id && id[0];
+    if(ok){
+      id = id[0];
+      return '<iframe src="https://player.vimeo.com/video/'+id+'?portrait=0" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+    }else return '';
+  }else if(type === 'youtube'){
+    var id = value.match(/(?:\/)?(?:v=)?([\w]{11})/);
+    var ok = id && id[0];
+    if(ok){
+      id = id[0];
+      return '<iframe width="100%" height="500" src="https://www.youtube.com/embed/'+id+'" frameborder="0" allowfullscreen></iframe>'
+    }else return '';
+  }else if(type === 'figshare'){
+    var id = value.match(/([\d]{7})$/);
+    var ok = id && id[0];
+    if(ok){
+      id = id[0];
+      return '<iframe src="https://widgets.figshare.com/articles/'+id+'/embed?show_title=1" width="100%" height="716" frameborder="0"></iframe>'
+    }else return '';
   }else{
-    console.log('type of resource : ', type, ' value : ', value);
-  }//TODO : vimeo, eventbrite, ...
+    console.log('unknown type of resource : ', type, ' value : ', value);
+  }//TODO : slideshare, eventbrite, ...
 }
 
 var cleanHTMLContent = function(raw){
@@ -291,7 +314,8 @@ var fetchProfileImage = function(person, callback){
   var magic = {
     jpg: 'ffd8ffe0',
     png: '89504e47',
-    gif: '47494638'
+    gif: '47494638',
+    alt: 'ffd8ffe1'
   };
   // console.log('going to verify ', personImgUrl);
   request({
@@ -305,7 +329,7 @@ var fetchProfileImage = function(person, callback){
     }
     else{
       var magicNumberInBody = body.toString('hex',0,4);
-      if(magicNumberInBody == magic.png || magicNumberInBody == magic.jpg || magicNumberInBody == magic.gif){
+      if(magicNumberInBody == magic.png || magicNumberInBody == magic.jpg || magicNumberInBody == magic.gif || magicNumberInBody == magic.alt){
         person.image_url = personImgUrl;
         var contents = cleanHTMLContent(body);
         callback(null, person);
