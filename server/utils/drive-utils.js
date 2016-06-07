@@ -320,13 +320,13 @@ var fetchProfileImage = function(person, callback){
     gif: '47494638',
     alt: 'ffd8ffe1'
   };
-  // console.log('going to verify ', personImgUrl);
+  console.log('going to verify ', personImgUrl);
   request({
     encoding : null,
     url : personImgUrl
   }, function(err, response, body){
     if(err){
-      // console.log('fetching image', personImgUrl, ' failed!');
+      console.log('fetching image', personImgUrl, ' failed!');
       person.image_url = gAssetsRoutes.images_annuaire + 'default.png';
       callback(err, person);
     }
@@ -402,6 +402,10 @@ var parsePersonsInDocuments = function(data, callback){
   var ok = data.annuaire && data.annuaire.gContent;
   if(!ok)return callback(undefined, data);
 
+  data.annuaire.gContent = data.annuaire.gContent.filter(function(member) {
+    return member.identifiant.trim().length > 0;
+  })
+
   data.annuaire.gContent.forEach(function(person){
     var name = (person.Surname + ' ' + person.Name).toLowerCase();
     members.push({
@@ -412,7 +416,6 @@ var parsePersonsInDocuments = function(data, callback){
       url : "/membres/"+person.identifiant
     });
   });
-
   for(var i in data){
     if(data[i].type === 'text'){
       data[i].gContent = parsePersons(data[i].gContent, members, 'membre');
@@ -433,7 +436,6 @@ var parsePersonsInDocuments = function(data, callback){
   }
 
   console.log('done with members identification');
-
   callback(undefined, data);
 }
 
