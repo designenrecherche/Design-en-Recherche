@@ -331,10 +331,16 @@ var parseGObject = function(object, callback){
 }
 
 var fetchProfileImage = function(person, callback){
-  console.log('profile pictures is an array', Array.isArray(profilePictures));
-  var driveImage = profilePictures.find(function(file) {
+  var driveImage;/* = profilePictures.find(function(file) {
     return file.name === person.identifiant + '.png';
-  });
+  });*/
+  for (var i = 0 ; i < profilePictures.length ; i++) {
+    var file = profilePictures[i];
+    if (file.name === person.identifiant + '.png') {
+      driveImage = file;
+      break;
+    }
+  }
   var hasAProfilePicture = driveImage !== undefined;
   person.image_url = hasAProfilePicture ? 'assets/profile_pictures/' + person.identifiant + '.png' : 'assets/profile_pictures/default.png';
   callback(null, person);
@@ -553,6 +559,7 @@ var refreshData = function(){
         jwtClient.authorize(function (err, tokens) {
           if (err) {
             console.log(err);
+            profileDb(err);
             return;
           }
           // listing profile pictures
@@ -567,6 +574,7 @@ var refreshData = function(){
                 profilePictures.forEach(function(meta) {
                   var dest = path.resolve(__dirname + '/../assets/profile_pictures/' + meta.name);
                   var file = fs.createWriteStream(dest);
+                  console.log('downloading ', meta.name);
                   drive.files.get({
                      fileId: meta.id,
                      auth: jwtClient,
@@ -580,12 +588,12 @@ var refreshData = function(){
                   })
                   .pipe(file);
                 });
-                profileDb(err);
-              } else profileDb(err);
+                profileDb(err, jwtClient);
+              } else profileDb(err, jwtClient);
           });
         });
       },
-      function(resourcesDb) {
+      function(jwtClient, resourcesDb) {
          // listing resource files
           drive.files.list({
             auth: jwtClient,
@@ -595,31 +603,37 @@ var refreshData = function(){
           }, function (err, resp) {
             if (!err) {
               publicResources = resp.files;
+              console.log('public resources : ', publicResources.map(function(res) {
+                return res.name;
+              }))
               async.mapSeries(publicResources, function(meta, resourceCb) {
                 var dest = path.resolve(__dirname + '/../assets/resources/' + meta.name);
                 console.log('starting download for resource ', meta.name);
-                var exceedsBufferSize = +meta.size >= 256000000;
-                var file = fs.createWriteStream(dest);
-                drive.files.get({
-                   fileId: meta.id,
-                   auth: jwtClient,
-                   alt: 'media'
-                })
-                .on('end', function() {
-                  console.log('Done downloading for ', meta.name);
-                  resourceCb(null, meta);
-                })
-                .on('error', function(err) {
-                  console.log('Error during download', err);
-                  resourceCb(err);
-                })
-                .pipe(file);
+                var Mo = 1000 * 1000;
+                var exceedsBufferSize = +meta.size >= 256 * Mo;
+                console.log('exceeds buffer size', exceedsBufferSize);
+                if (!exceedsBufferSize) {
+                  var file = fs.createWriteStream(dest);
+                  drive.files.get({
+                     fileId: meta.id,
+                     auth: jwtClient,
+                     alt: 'media'
+                  })
+                  .on('end', function() {
+                    console.log('Done downloading for ', meta.name);
+                    resourceCb(null, meta);
+                  })
+                  .on('error', function(err) {
+                    console.log('Error during download', err);
+                    resourceCb(err);
+                  })
+                  .pipe(file);
+                } else resourceCb(null);
               }, function(err2) {
                 console.log('done downloading resources, errors: ', err2);
                 resourcesDb(err2);
               });
             } else resourcesDb(err);
-          });
         });
       }
     ], function() {
