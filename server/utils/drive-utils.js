@@ -210,6 +210,7 @@ var timer;
 var parseGObject = function(object, callback){
   var urlFound;
   var returned = false;
+  var props = [];
 
 
   setTimeout(function(){
@@ -222,7 +223,6 @@ var parseGObject = function(object, callback){
 
 
 
-  var props = [];
   for(var i in object){
     props.push(i);
   }
@@ -318,7 +318,6 @@ var parseGObject = function(object, callback){
       c(undefined, {key : i, value : object[i]});
     }
   }, function(err, results){
-
     for(var i in results){
       object[results[i].key] = results[i].value;
     }
@@ -332,6 +331,7 @@ var parseGObject = function(object, callback){
 }
 
 var fetchProfileImage = function(person, callback){
+  console.log('profile pictures is an array', Array.isArray(profilePictures));
   var driveImage = profilePictures.find(function(file) {
     return file.name === person.identifiant + '.png';
   });
@@ -539,91 +539,100 @@ var refreshData = function(){
   if(!isRefreshing){
     isRefreshing = true;
     console.log('begining to refresh data');
-
     console.log('starting to retrieve static assets from google drive');
-    var jwtClient = new google.auth.JWT(
-      key.client_email,
-      null,
-      key.private_key,
-      SCOPES,
-      null
-    );
-    jwtClient.authorize(function (err, tokens) {
-      if (err) {
-        console.log(err);
-        return;
+    var jwtClient;
+    async.waterfall([
+      function(profileDb) {
+        jwtClient = new google.auth.JWT(
+          key.client_email,
+          null,
+          key.private_key,
+          SCOPES,
+          null
+        );
+        jwtClient.authorize(function (err, tokens) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          // listing profile pictures
+          drive.files.list({
+            auth: jwtClient,
+            // contained by images folder
+            q: "'0B8drr1YUb3a7RFBTWW1FVXhIdTA' in parents",
+            fields: '*'
+          }, function (err, resp) {
+              if (!err) {
+                profilePictures = resp.files;
+                profilePictures.forEach(function(meta) {
+                  var dest = path.resolve(__dirname + '/../assets/profile_pictures/' + meta.name);
+                  var file = fs.createWriteStream(dest);
+                  drive.files.get({
+                     fileId: meta.id,
+                     auth: jwtClient,
+                     alt: 'media'
+                  })
+                  .on('end', function() {
+                    console.log('Done downloading for ', meta.name);
+                  })
+                  .on('error', function(err) {
+                    console.log('Error during download', err);
+                  })
+                  .pipe(file);
+                });
+                profileDb(err);
+              } else profileDb(err);
+          });
+        });
+      },
+      function(resourcesDb) {
+         // listing resource files
+          drive.files.list({
+            auth: jwtClient,
+            // contained by public resources folder
+            q: "'0B4WaIphtOWIGZ1FEcGZwT1lJODA' in parents",
+            fields: '*'
+          }, function (err, resp) {
+            if (!err) {
+              publicResources = resp.files;
+              async.mapSeries(publicResources, function(meta, resourceCb) {
+                var dest = path.resolve(__dirname + '/../assets/resources/' + meta.name);
+                console.log('starting download for resource ', meta.name);
+                var exceedsBufferSize = +meta.size >= 256000000;
+                var file = fs.createWriteStream(dest);
+                drive.files.get({
+                   fileId: meta.id,
+                   auth: jwtClient,
+                   alt: 'media'
+                })
+                .on('end', function() {
+                  console.log('Done downloading for ', meta.name);
+                  resourceCb(null, meta);
+                })
+                .on('error', function(err) {
+                  console.log('Error during download', err);
+                  resourceCb(err);
+                })
+                .pipe(file);
+              }, function(err2) {
+                console.log('done downloading resources, errors: ', err2);
+                resourcesDb(err2);
+              });
+            } else resourcesDb(err);
+          });
+        });
       }
-      // listing profile pictures
-      drive.files.list({
-        auth: jwtClient,
-        // contained by images folder
-        q: "'0B8drr1YUb3a7RFBTWW1FVXhIdTA' in parents",
-        fields: '*'
-      }, function (err, resp) {
-        if (!err) {
-          profilePictures = resp.files;
-          profilePictures.forEach(function(meta) {
-            var dest = path.resolve(__dirname + '/../assets/profile_pictures/' + meta.name);
-            var file = fs.createWriteStream(dest);
-            drive.files.get({
-               fileId: meta.id,
-               auth: jwtClient,
-               alt: 'media'
-            })
-            .on('end', function() {
-              console.log('Done downloading for ', meta.name);
-            })
-            .on('error', function(err) {
-              console.log('Error during download', err);
-            })
-            .pipe(file);
-          });
-        }
-      });
-
-      // listing resource files
-      drive.files.list({
-        auth: jwtClient,
-        // contained by public resources folder
-        q: "'0B4WaIphtOWIGZ1FEcGZwT1lJODA' in parents",
-        fields: '*'
-      }, function (err, resp) {
-        if (!err) {
-          publicResources = resp.files;
-          async.mapSeries(publicResources, function(meta, resourceCb) {
-            var dest = path.resolve(__dirname + '/../assets/resources/' + meta.name);
-            console.log('starting download for resource ', meta.name);
-            var exceedsBufferSize = +meta.size >= 256000000;
-            var file = fs.createWriteStream(dest);
-            drive.files.get({
-               fileId: meta.id,
-               auth: jwtClient,
-               alt: 'media'
-            })
-            .on('end', function() {
-              console.log('Done downloading for ', meta.name);
-              resourceCb(null, meta);
-            })
-            .on('error', function(err) {
-              console.log('Error during download', err);
-              resourceCb(err);
-            })
-            .pipe(file);
-          }, function(err) {
-            console.log('done downloading resources, errors: ', err);
-          });
+    ], function() {
+      console.log('done with static assets, refreshing data now');
+      fs.readFile(__dirname + '/' + gRoutesRoutes, 'utf8', function(err, routes){
+        try{
+          gRoutes = JSON.parse(routes);
+          doRefreshData(gRoutes);
+        }catch(e){
+          console.log('error in fetching routes : ', e);
         }
       });
     });
-
-    fs.readFile(__dirname + '/' + gRoutesRoutes, 'utf8', function(err, routes){
-      try{
-        gRoutes = JSON.parse(routes);
-        doRefreshData(gRoutes);
-      }catch(e){
-        console.log('error in fetching routes : ', e);
-      }
-    })
   }else{
     console.log('refresh asked, but already refreshing : leaving');
   }
