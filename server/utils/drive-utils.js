@@ -562,7 +562,7 @@ var refreshData = function(){
       }, function (err, resp) {
         if (!err) {
           profilePictures = resp.files;
-          profilePictures.forEach(meta => {
+          profilePictures.forEach(function(meta) {
             var dest = path.resolve(__dirname + '/../assets/profile_pictures/' + meta.name);
             var file = fs.createWriteStream(dest);
             drive.files.get({
@@ -590,7 +590,7 @@ var refreshData = function(){
       }, function (err, resp) {
         if (!err) {
           publicResources = resp.files;
-          async.mapSeries(publicResources, ((meta, resourceCb) => {
+          async.mapSeries(publicResources, function(meta, resourceCb) {
             var dest = path.resolve(__dirname + '/../assets/resources/' + meta.name);
             console.log('starting download for resource ', meta.name);
             var exceedsBufferSize = +meta.size >= 256000000;
@@ -611,7 +611,7 @@ var refreshData = function(){
             .pipe(file);
           }, function(err) {
             console.log('done downloading resources, errors: ', err);
-          }));
+          });
         }
       });
     });
