@@ -29,6 +29,16 @@ npm install
 bower install
 ```
 
+### Google Drive API connection
+
+The website uses google drive as a data source. Textual contents (spreadsheets and pages) are fetched thanks to the "publish to the web" functionality in google apps.
+
+Static assets (images, pdfs, videos, ...) are fetched through Google Drive API v3 and stored as static assets on the server (refreshed each time data is refreshed).
+
+Google Drive API connection is provided by a service account allowing to perform server-to-server interactions. The credentials relative to this service account are provided by a ``key.json`` file located in ``server/config``.
+
+Please refer to [Google's guide](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) if you plan to change the service account responsible for static files access. You will have to create a new service account, grant it with G Suite domain-wide access, and download a new secret key in json format.
+
 ## Usage
 
 Development :

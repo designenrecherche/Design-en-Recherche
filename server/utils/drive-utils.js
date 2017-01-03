@@ -5,13 +5,32 @@ var gRoutes = require('./../config/drive_routes');
 var gAssetsRoutes = require('./../config/drive_assets');
 var gRefreshRate = require('./../config/drive_refresh_rate');
 var async = require('async');
+var path = require('path');
 var request = require('request');
 var cheerio = require('cheerio');
 var Baobab = require('baobab');
+var google = require('googleapis');
+var drive = google.drive('v3');
 var fs = require('fs');
+var path = require('path');
+var http = require('https');
+
 var gRoutesRoutes = './../config/drive_routes.json';
 var driveData, tree, isRefreshing;
 
+
+var SCOPES = [
+'https://www.googleapis.com/auth/drive',
+'https://www.googleapis.com/auth/drive.appdata',
+'https://www.googleapis.com/auth/drive.file',
+'https://www.googleapis.com/auth/drive.metadata',
+'https://www.googleapis.com/auth/drive.metadata.readonly',
+'https://www.googleapis.com/auth/drive.photos.readonly',
+'https://www.googleapis.com/auth/drive.readonly',
+];
+var profilePictures = [];
+var publicResources = [];
+var key = require('./../config/key.json');
 
 /*
 UTILS
@@ -34,12 +53,12 @@ var replaceResource = function(type, value, text){
     var extension = value.split('.').pop();
     if(extension === 'pdf'){
       return '<iframe style="height:1000px" src="'
-              +gAssetsRoutes.ressources + value
+              + '/assets/resources/' + value
               + '"></iframe>';
     }else if(extension === 'png' || extension === 'jpg' || extension === 'jpeg'){
-      return '<img class="ressource-image" src="'+gAssetsRoutes.ressources +  value +'"></img>';
+      return '<img class="ressource-image" src="'+'/assets/resources/' +  value +'"></img>';
     }else if(extension === 'wav' || extension === 'mp3' || extension === 'ogg' || extension === 'aac' || extension === 'wma'){
-      var adress = gAssetsRoutes.ressources + value;
+      var adress = '/assets/resources/' + value;
       console.log('adresse son : ', adress);
       return '<audio controls src="'+adress + '">Votre navigateur ne supporte pas l\'élément <code>audio</code>. Retrouvez cette bande sonore à <a href="'+adress+'">l\'adresse suivante</a></audio>';
     }
@@ -313,7 +332,13 @@ var parseGObject = function(object, callback){
 }
 
 var fetchProfileImage = function(person, callback){
-  var personImgUrl = gAssetsRoutes.images_annuaire + encodeURIComponent(person.identifiant) + ".png";
+  var driveImage = profilePictures.find(function(file) {
+    return file.name === person.identifiant + '.png';
+  });
+  var hasAProfilePicture = driveImage !== undefined;
+  person.image_url = hasAProfilePicture ? 'assets/profile_pictures/' + person.identifiant + '.png' : 'assets/profile_pictures/default.png';
+  callback(null, person);
+  /*var personImgUrl = gAssetsRoutes.images_annuaire + encodeURIComponent(person.identifiant) + ".png";
   var magic = {
     jpg: 'ffd8ffe0',
     png: '89504e47',
@@ -343,6 +368,7 @@ var fetchProfileImage = function(person, callback){
       }
     }
   });
+  */
 }
 
 var fetchProfileImages = function(data, callback){
@@ -352,7 +378,6 @@ var fetchProfileImages = function(data, callback){
     return callback(undefined, data);
   }
   var annuaire = data.annuaire.gContent;
-
   async.map(annuaire, async.ensureAsync(fetchProfileImage), function(err, results){
     if(err){
       callback(err, data);
@@ -514,6 +539,82 @@ var refreshData = function(){
   if(!isRefreshing){
     isRefreshing = true;
     console.log('begining to refresh data');
+
+    console.log('starting to retrieve static assets from google drive');
+    var jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      SCOPES,
+      null
+    );
+    jwtClient.authorize(function (err, tokens) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      // listing profile pictures
+      drive.files.list({
+        auth: jwtClient,
+        // contained by images folder
+        q: "'0B8drr1YUb3a7RFBTWW1FVXhIdTA' in parents",
+        fields: '*'
+      }, function (err, resp) {
+        if (!err) {
+          profilePictures = resp.files;
+          profilePictures.forEach(meta => {
+            var dest = path.resolve(__dirname + '/../assets/profile_pictures/' + meta.name);
+            var file = fs.createWriteStream(dest);
+            drive.files.get({
+               fileId: meta.id,
+               auth: jwtClient,
+               alt: 'media'
+            })
+            .on('end', function() {
+              console.log('Done downloading for ', meta.name);
+            })
+            .on('error', function(err) {
+              console.log('Error during download', err);
+            })
+            .pipe(file);
+          });
+        }
+      });
+
+      // listing resource files
+      drive.files.list({
+        auth: jwtClient,
+        // contained by public resources folder
+        q: "'0B4WaIphtOWIGZ1FEcGZwT1lJODA' in parents",
+        fields: '*'
+      }, function (err, resp) {
+        if (!err) {
+          publicResources = resp.files;
+          async.mapSeries(publicResources, ((meta, resourceCb) => {
+            var dest = path.resolve(__dirname + '/../assets/resources/' + meta.name);
+            console.log('starting download for resource ', meta.name);
+            var exceedsBufferSize = +meta.size >= 256000000;
+            var file = fs.createWriteStream(dest);
+            drive.files.get({
+               fileId: meta.id,
+               auth: jwtClient,
+               alt: 'media'
+            })
+            .on('end', function() {
+              console.log('Done downloading for ', meta.name);
+              resourceCb(null, meta);
+            })
+            .on('error', function(err) {
+              console.log('Error during download', err);
+              resourceCb(err);
+            })
+            .pipe(file);
+          }, function(err) {
+            console.log('done downloading resources, errors: ', err);
+          }));
+        }
+      });
+    });
 
     fs.readFile(__dirname + '/' + gRoutesRoutes, 'utf8', function(err, routes){
       try{

@@ -5,3 +5,6 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
+/server/config/key.json
+/server/assets/*
+npm-debug.log
